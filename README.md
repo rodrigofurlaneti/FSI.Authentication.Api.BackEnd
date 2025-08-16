@@ -137,6 +137,10 @@ erDiagram
     PRESENTATION_CONTROLLERS ||--|| APPLICATION_USECASES : "invokes"
     WORKER_CONSUMERS }o--|| INFRASTRUCTURE_OUTBOX : "processes"
 
+```
+
+```mermaid
+
 erDiagram
   %% =======================
   %% DOMAIN LAYER
@@ -454,7 +458,9 @@ erDiagram
   WORKER_JOBS }o--|| APP_USECASES_COMMANDS : triggers
   WORKER_JOBS }o--|| APP_SERVICES_APPSERVICES : runs
 
+
 ```
+
 
 ```mermaid
 
