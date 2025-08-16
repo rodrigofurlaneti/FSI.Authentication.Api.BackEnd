@@ -747,3 +747,40 @@ flowchart TB
   Requests --> Responses
   Bindings --> Requests
   ```
+
+  # Config
+  ```mermaid
+  %%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph Config["Presentation/Config"]
+    direction TB
+
+    subgraph Swagger["Swagger / OpenAPI"]
+      Sw1["SwaggerConfig Setup UI/Docs"]
+      Sw2["SwaggerAuthConfig JWT/OAuth2 no Swagger"]
+    end
+
+    subgraph Versioning["Versioning"]
+      V1["ApiVersioningConfig Configura versões v1, v2..."]
+      V2["ApiExplorerConfig Integra com Swagger"]
+    end
+
+    subgraph Cors["CORS"]
+      C1["CorsConfig Define políticas de origem"]
+    end
+
+    subgraph Json["JSON Serialization"]
+      J1["JsonOptionsConfig Config System.Text.Json/Newtonsoft"]
+      J2["ProblemDetailsConfig Config RFC7807 p/ erros"]
+    end
+
+    subgraph Rate["RateLimiting (opcional)"]
+      R1["RateLimitingConfig Restrição de requisições"]
+    end
+
+    subgraph Health["HealthChecks (opcional)"]
+      H1["HealthChecksConfig Registra checks p/ readiness/liveness"]
+    end
+  end
+  ```
