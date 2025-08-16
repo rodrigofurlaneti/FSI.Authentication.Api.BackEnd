@@ -784,3 +784,62 @@ flowchart TB
     end
   end
   ```
+
+  # Domain Layer
+```mermaid
+  %%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph Domain["Domain Layer"]
+    direction TB
+
+    subgraph Entities["Entities"]
+      E1["User"]
+      E2["Expense"]
+      E3["Transaction"]
+      E4["Category"]
+    end
+
+    subgraph ValueObjects["ValueObjects"]
+      V1["Money"]
+      V2["Email"]
+      V3["Document (CPF/CNPJ)"]
+      V4["DateRange"]
+    end
+
+    subgraph Services["Domain Services"]
+      S1["ExpenseDomainService"]
+      S2["TransactionDomainService"]
+    end
+
+    subgraph Events["Domain Events"]
+      Ev1["UserCreatedDomainEvent"]
+      Ev2["ExpenseDeletedDomainEvent"]
+    end
+
+    subgraph Specifications["Specifications (opcional)"]
+      Sp1["ExpenseOverLimitSpec"]
+      Sp2["ActiveUserSpec"]
+    end
+
+    subgraph Exceptions["Exceptions"]
+      Ex1["DomainException"]
+      Ex2["InvalidMoneyException"]
+    end
+
+    subgraph Aggregates["Aggregates"]
+      Ag1["ExpenseAggregate"]
+      Ag2["TransactionAggregate"]
+    end
+  end
+
+  %% Relações
+  Entities --> ValueObjects
+  Entities --> Events
+  Aggregates --> Entities
+  Services --> Entities
+  Services --> ValueObjects
+  Specifications --> Entities
+  Exceptions --> Entities
+  
+  ```
