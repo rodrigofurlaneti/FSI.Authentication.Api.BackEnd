@@ -12,7 +12,7 @@ flowchart TB
 
   %% === API / Presentation ===
   subgraph Api["Presentation Layer (API)"]
-    Controller["Controllers\n+ Auth/JWT\n+ ProblemDetails"]
+    Controller["Controllers Auth/JWT ProblemDetails"]
   end
 
   %% === Core DDD ===
@@ -66,15 +66,15 @@ flowchart TB
 flowchart TB
 
   subgraph Application["Application Layer"]
-    DTOs["DTOs\n+ Entrada/Saída de Dados\n+ Simples e sem lógica de negócio"]
-    Mappers["Mappers\n+ Conversão DTO ⇄ Entities\n+ Isolamento entre camadas"]
-    Interfaces["Interfaces\n+ Contratos p/ Serviços\n+ Abstrações p/ Domain/Infra"]
-    Services["App Services\n+ Orquestram casos de uso\n+ Chama Domain & Infra\n+ Regras de aplicação"]
-    UseCases["UseCases\n+ Casos de Uso específicos\n+ Fluxo de negócio orquestrado"]
-    Validators["Validators (FluentValidation)\n+ Validação de DTOs e Requests"]
-    Handlers["Handlers (Command/Query)\n+ Implementam CQRS\n+ Integração com Mediator"]
-    Notifications["Notifications\n+ Mensagens de domínio convertidas p/ app\n+ Notificação de erros ou eventos"]
-    Exceptions["Exceptions\n+ Tratamento de falhas\n+ Regras de exceção de aplicação"]
+    DTOs["DTOs Entrada/Saída de Dados Simples e sem lógica de negócio"]
+    Mappers["Mappers Conversão DTO ⇄ Entities Isolamento entre camadas"]
+    Interfaces["Interfaces Contratos p/ Serviços Abstrações p/ Domain/Infra"]
+    Services["App Services Orquestram casos de uso Chama Domain & Infra Regras de aplicação"]
+    UseCases["UseCases Casos de Uso específicos Fluxo de negócio orquestrado"]
+    Validators["Validators (FluentValidation) Validação de DTOs e Requests"]
+    Handlers["Handlers (Command/Query) Implementam CQRS Integração com Mediator"]
+    Notifications["Notifications Mensagens de domínio convertidas p/ app Notificação de erros ou eventos"]
+    Exceptions["Exceptions Tratamento de falhas Regras de exceção de aplicação"]
   end
 
 ```
