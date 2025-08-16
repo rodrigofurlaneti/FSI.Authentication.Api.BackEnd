@@ -138,6 +138,8 @@ flowchart TB
 
 ```
 
+# Mappers
+
 ```mermaid
 %%{init: {"flowchart": {"htmlLabels": false}} }%%
 flowchart TB
@@ -179,3 +181,41 @@ flowchart TB
 
 ```
 
+
+# Interfaces
+```mermaid
+
+
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph Interfaces["Application/Interfaces"]
+    direction TB
+
+    subgraph Repositories["Repositories"]
+      R_desc["Contratos p/ acesso a dados\nInfra implementa\nEx.: IUserRepository, IExpenseRepository"]
+    end
+
+    subgraph Services["Services"]
+      S_desc["Serviços de aplicação\nUsados pela API/Worker\nEx.: IEmailService, INotificationService"]
+    end
+
+    subgraph Messaging["Messaging (opcional)"]
+      M_desc["Contratos p/ mensageria\nEx.: IMessageProducer, IMessageConsumer"]
+    end
+
+    subgraph External["External / Gateways (opcional)"]
+      E_desc["Contratos p/ integrações externas\nEx.: IPaymentGateway, IAuthProvider"]
+    end
+
+    subgraph Common["Common (opcional)"]
+      C_desc["Interfaces utilitárias/genéricas\nEx.: IUnitOfWork, ILoggerAdapter"]
+    end
+  end
+
+  %% Relações
+  Repositories --> Services
+  Services --> Messaging
+  Messaging --> External
+  External --> Common
+```
