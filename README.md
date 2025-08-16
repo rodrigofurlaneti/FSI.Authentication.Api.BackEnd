@@ -588,3 +588,44 @@ flowchart TB
   end
 
   ```
+
+  # Auth / Security
+```mermaid
+  %%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph Auth["Presentation/Auth"]
+    direction TB
+
+    subgraph Jwt["JWT"]
+      J1["JwtAuthenticationConfig Configurações (Issuer, Audience, SigningKey)"]
+      J2["JwtTokenService Geração e validação de tokens"]
+      J3["JwtBearerEventsHandler Eventos do pipeline JWT (OnTokenValidated etc.)"]
+    end
+
+    subgraph Policies["Authorization Policies"]
+      P1["AuthorizationPolicies Regras baseadas em Roles/Claims/Scopes"]
+      P2["PolicyNames Constantes com nomes de políticas"]
+    end
+
+    subgraph Claims["Claims"]
+      C1["ClaimsExtensions Helpers p/ extrair claims do usuário"]
+      C2["ClaimTypesCustom Definição de claims customizadas"]
+    end
+
+    subgraph Identity["Identity (opcional)"]
+      I1["IdentityConfig Configuração ASP.NET Identity"]
+      I2["ApplicationUser Usuário customizado com propriedades extras"]
+    end
+
+    subgraph Providers["External Providers (opcional)"]
+      PR1["OAuth2ProviderConfig Integração com Google, Microsoft, Facebook"]
+      PR2["ExternalLoginService Serviço de login via provedores externos"]
+    end
+
+    subgraph Utils["Utils"]
+      U1["PasswordHasher Hash/Salt seguro p/ senhas"]
+      U2["TokenValidationParametersFactory Configuração centralizada p/ validação de tokens"]
+    end
+  end
+  ```
