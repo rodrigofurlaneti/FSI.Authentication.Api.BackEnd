@@ -136,6 +136,324 @@ erDiagram
     INFRASTRUCTURE_REPOSITORIES }o--|| DOMAIN_ENTITIES : "persists"
     PRESENTATION_CONTROLLERS ||--|| APPLICATION_USECASES : "invokes"
     WORKER_CONSUMERS }o--|| INFRASTRUCTURE_OUTBOX : "processes"
+
+erDiagram
+  %% =======================
+  %% DOMAIN LAYER
+  %% =======================
+  DOMAIN_ENTITIES {
+    PK id
+    string name
+  }
+  DOMAIN_VALUEOBJECTS {
+    string kind
+  }
+  DOMAIN_EVENTS {
+    PK event_id
+    string event_type
+    datetime occurred_at
+  }
+  DOMAIN_SPECIFICATIONS {
+    PK spec_id
+    string rule_name
+  }
+  DOMAIN_EXCEPTIONS {
+    PK code
+    string message
+  }
+  DOMAIN_AGGREGATES {
+    PK aggregate_root_id
+    string aggregate_name
+  }
+
+  %% =======================
+  %% APPLICATION LAYER
+  %% =======================
+  APP_DTO_REQUESTS {
+    PK dto_req_id
+    string name
+  }
+  APP_DTO_RESPONSES {
+    PK dto_res_id
+    string name
+  }
+  APP_DTO_SHARED {
+    PK dto_shared_id
+    string name
+  }
+  APP_MAPPERS {
+    PK mapper_id
+    string profile
+  }
+  APP_INTERFACES_REPOSITORIES {
+    PK irepo_id
+    string contract
+  }
+  APP_INTERFACES_SERVICES {
+    PK isvc_id
+    string contract
+  }
+  APP_INTERFACES_MESSAGING {
+    PK imsg_id
+    string contract
+  }
+  APP_INTERFACES_EXTERNAL {
+    PK ext_id
+    string provider
+  }
+  APP_SERVICES_APPSERVICES {
+    PK appsvc_id
+    string name
+  }
+  APP_USECASES_COMMANDS {
+    PK cmd_id
+    string name
+  }
+  APP_USECASES_QUERIES {
+    PK qry_id
+    string name
+  }
+  APP_USECASES_EVENTS {
+    PK uevt_id
+    string name
+  }
+  APP_USECASES_PIPELINES {
+    PK upipe_id
+    string name
+  }
+  APP_VALIDATORS_FEATURES {
+    PK vfeat_id
+    string name
+  }
+  APP_VALIDATORS_COMMON {
+    PK vcommon_id
+    string rule_name
+  }
+  APP_VALIDATORS_PIPELINE {
+    PK vpipe_id
+    string behavior
+  }
+  APP_HANDLERS_COMMANDS {
+    PK hcmd_id
+    string name
+  }
+  APP_HANDLERS_QUERIES {
+    PK hqry_id
+    string name
+  }
+  APP_HANDLERS_NOTIFICATIONS {
+    PK hnot_id
+    string name
+  }
+  APP_HANDLERS_PIPELINE {
+    PK hpipe_id
+    string behavior
+  }
+  APP_HANDLERS_MAPPINGS {
+    PK hmap_id
+    string adapter
+  }
+  APP_NOTIFICATIONS_EVENTS {
+    PK anevt_id
+    string name
+  }
+  APP_NOTIFICATIONS_PUBLISHERS {
+    PK anpub_id
+    string name
+  }
+  APP_NOTIFICATIONS_HANDLERS {
+    PK anhdl_id
+    string name
+  }
+  APP_NOTIFICATIONS_ADAPTERS {
+    PK anadp_id
+    string name
+  }
+  APP_NOTIFICATIONS_OUTBOX {
+    PK outbox_id
+    string status
+  }
+  APP_NOTIFICATIONS_POLICIES {
+    PK anpol_id
+    string policy
+  }
+  APP_EXCEPTIONS_TYPES {
+    PK aex_id
+    string type
+  }
+  APP_EXCEPTIONS_MAPPING {
+    PK aexmap_id
+    string map_name
+  }
+  APP_EXCEPTIONS_TRANSLATORS {
+    PK aextrl_id
+    string translator
+  }
+  APP_EXCEPTIONS_MIDDLEWARE {
+    PK aexmw_id
+    string middleware
+  }
+  APP_EXCEPTIONS_POLICIES {
+    PK aexpol_id
+    string policy
+  }
+  APP_EXCEPTIONS_CODES {
+    PK aexcode
+    string code
+  }
+
+  %% =======================
+  %% INFRASTRUCTURE LAYER
+  %% =======================
+  INFRA_REPOSITORIES {
+    PK repo_id
+    string impl
+  }
+  INFRA_MESSAGING {
+    PK bus_id
+    string broker
+  }
+  INFRA_OUTBOX_PROCESSOR {
+    PK obproc_id
+    string worker
+  }
+  INFRA_PERSISTENCE {
+    PK persistence_id
+    string db
+  }
+  INFRA_MIGRATIONS {
+    PK migration_id
+    string script_name
+  }
+
+  %% =======================
+  %% PRESENTATION LAYER
+  %% =======================
+  PRES_CONTROLLERS {
+    PK ctrl_id
+    string route
+  }
+  PRES_FILTERS {
+    PK filter_id
+    string kind
+  }
+  PRES_MIDDLEWARE {
+    PK mw_id
+    string step
+  }
+  PRES_AUTH {
+    PK auth_id
+    string scheme
+  }
+  PRES_PROBLEMDETAILS {
+    PK pd_id
+    string type_uri
+  }
+  PRES_ADMIN {
+    PK admin_id
+    string capability
+  }
+  PRES_MODELS_REQUESTS {
+    PK preq_id
+    string name
+  }
+  PRES_MODELS_RESPONSES {
+    PK pres_id
+    string name
+  }
+  PRES_CONFIG {
+    PK cfg_id
+    string area
+  }
+
+  %% =======================
+  %% WORKER LAYER
+  %% =======================
+  WORKER_JOBS {
+    PK job_id
+    string schedule
+  }
+  WORKER_CONSUMERS {
+    PK consumer_id
+    string queue
+  }
+
+  %% =======================
+  %% RELATIONSHIPS (crow's foot)
+  %% =======================
+
+  %% Domain core
+  DOMAIN_AGGREGATES ||--o{ DOMAIN_ENTITIES : contains
+  DOMAIN_ENTITIES ||--o{ DOMAIN_VALUEOBJECTS : embeds
+  DOMAIN_ENTITIES ||--o{ DOMAIN_EVENTS : raises
+  DOMAIN_SPECIFICATIONS ||--o{ DOMAIN_ENTITIES : constrains
+  DOMAIN_EXCEPTIONS ||--o{ DOMAIN_ENTITIES : guards
+
+  %% Application DTOs & Mappers
+  APP_DTO_REQUESTS ||--o{ APP_MAPPERS : uses
+  APP_DTO_RESPONSES ||--o{ APP_MAPPERS : uses
+  APP_DTO_SHARED ||--o{ APP_MAPPERS : uses
+  APP_MAPPERS }o--|| DOMAIN_ENTITIES : maps_to
+
+  %% UseCases & Services & Interfaces
+  APP_SERVICES_APPSERVICES ||--|| APP_INTERFACES_SERVICES : implements
+  APP_USECASES_COMMANDS ||--|| APP_SERVICES_APPSERVICES : orchestrates
+  APP_USECASES_QUERIES  ||--|| APP_SERVICES_APPSERVICES : orchestrates
+
+  %% Handlers (CQRS)
+  APP_HANDLERS_COMMANDS ||--|| APP_USECASES_COMMANDS : handles
+  APP_HANDLERS_QUERIES  ||--|| APP_USECASES_QUERIES  : handles
+  APP_HANDLERS_NOTIFICATIONS ||--|| APP_NOTIFICATIONS_EVENTS : handles
+  APP_HANDLERS_PIPELINE ||--o{ APP_HANDLERS_COMMANDS : wraps
+  APP_HANDLERS_PIPELINE ||--o{ APP_HANDLERS_QUERIES  : wraps
+  APP_HANDLERS_MAPPINGS }o--|| APP_DTO_REQUESTS : adapts_from
+  APP_HANDLERS_MAPPINGS }o--|| APP_DTO_RESPONSES : adapts_to
+
+  %% Validators
+  APP_VALIDATORS_FEATURES ||--o{ APP_DTO_REQUESTS : validates
+  APP_VALIDATORS_COMMON  ||--o{ APP_VALIDATORS_FEATURES : extends
+  APP_VALIDATORS_PIPELINE ||--o{ APP_HANDLERS_COMMANDS : enforces
+  APP_VALIDATORS_PIPELINE ||--o{ APP_HANDLERS_QUERIES  : enforces
+
+  %% Notifications & Outbox
+  APP_NOTIFICATIONS_EVENTS ||--o{ APP_NOTIFICATIONS_PUBLISHERS : published_by
+  APP_NOTIFICATIONS_PUBLISHERS ||--o{ INFRA_MESSAGING : uses_broker
+  APP_NOTIFICATIONS_OUTBOX ||--|| INFRA_OUTBOX_PROCESSOR : processed_by
+  APP_NOTIFICATIONS_OUTBOX }o--|| INFRA_PERSISTENCE : stored_in
+  WORKER_CONSUMERS }o--|| INFRA_MESSAGING : consumes
+
+  %% Exceptions
+  APP_EXCEPTIONS_TYPES ||--o{ APP_EXCEPTIONS_MAPPING : has
+  APP_EXCEPTIONS_TRANSLATORS ||--o{ APP_EXCEPTIONS_TYPES : normalizes
+  APP_EXCEPTIONS_MIDDLEWARE ||--o{ PRES_MIDDLEWARE : integrated_into
+  APP_EXCEPTIONS_CODES ||--o{ APP_EXCEPTIONS_MAPPING : catalogs
+
+  %% Interfaces -> Infra implementations
+  APP_INTERFACES_REPOSITORIES ||--|| INFRA_REPOSITORIES : implemented_by
+  APP_INTERFACES_MESSAGING   ||--|| INFRA_MESSAGING     : implemented_by
+  APP_INTERFACES_EXTERNAL    ||--o{ INFRA_MESSAGING     : may_call_via
+
+  %% Infra -> Domain
+  INFRA_REPOSITORIES }o--|| DOMAIN_ENTITIES : persists
+  INFRA_PERSISTENCE ||--o{ INFRA_REPOSITORIES : provides
+  INFRA_MIGRATIONS  ||--o{ INFRA_PERSISTENCE : evolves
+
+  %% Presentation entrypoints
+  PRES_CONTROLLERS ||--|| APP_USECASES_COMMANDS : invokes
+  PRES_CONTROLLERS ||--|| APP_USECASES_QUERIES  : invokes
+  PRES_MODELS_REQUESTS }o--|| PRES_CONTROLLERS : bound_to
+  PRES_MODELS_RESPONSES }o--|| PRES_CONTROLLERS : returned_by
+  PRES_FILTERS }o--|| PRES_CONTROLLERS : applied_to
+  PRES_MIDDLEWARE ||--o{ PRES_CONTROLLERS : surrounds
+  PRES_AUTH ||--o{ PRES_CONTROLLERS : secures
+  PRES_PROBLEMDETAILS ||--o{ PRES_CONTROLLERS : formats_errors
+  PRES_ADMIN ||--o{ INFRA_PERSISTENCE : inspects
+  PRES_CONFIG ||--o{ PRESENTATION : configures
+
+  %% Worker scheduling
+  WORKER_JOBS }o--|| APP_USECASES_COMMANDS : triggers
+  WORKER_JOBS }o--|| APP_SERVICES_APPSERVICES : runs
+
 ```
 
 ```mermaid
