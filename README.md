@@ -352,7 +352,9 @@ flowchart TB
     end
 
     subgraph Mappings["Mappings (opcional)"]
-      MP_desc["Adaptadores entre Command/Query e DTOs Normalização/Enriquecimento de dados]()_
+      MP_desc["Adaptadores entre Command/Query e DTOs Normalização/Enriquecimento de dados]()
+    end
+ end
 
 ```
 
@@ -401,43 +403,7 @@ flowchart TB
 
   # Exceptions
   ```mermaid
-  %%{init: {"flowchart": {"htmlLabels": false}} }%%
-flowchart TB
 
-  subgraph Exceptions["Application/Exceptions"]
-    direction TB
-
-    subgraph Types["Types"]
-      T_desc["Hierarquia de exceções de Aplicação • ApplicationException (base) • ValidationException • NotFoundException • ConflictException • UnauthorizedException • ForbiddenException • BusinessRuleException"]
-    end
-
-    subgraph Mapping["Mapping / ProblemDetails"]
-      M_desc["Mapeia Exception → ProblemDetails (RFC 7807) • status, type, title, detail, instance • errorCode, traceId, fieldErrors"]
-    end
-
-    subgraph Translators["Translators / Adapters"]
-      TR_desc["DomainException → ApplicationException InfraException → ApplicationException Normalização e códigos"]
-    end
-
-    subgraph Middleware["Middleware / Filters"]
-      MW_desc["ExceptionHandlingMiddleware ApiExceptionFilter (opcional) Oculta stack em produção"]
-    end
-
-    subgraph Policies["Policies (opcional)"]
-      P_desc["Retryable vs NonRetryable Idempotência/CorrelationId Telemetria/Logging"]
-    end
-
-    subgraph Codes["ErrorCodes / Messages"]
-      C_desc["Enum de códigos Mensagens padronizadas/i18n Catálogo de erros"]
-    end
-  end
-
-  %% Relações
-  Types --> Mapping
-  Translators --> Types
-  Middleware --> Mapping
-  Policies --> Middleware
-  Codes --> Mapping
 %%{init: {"flowchart": {"htmlLabels": false}} }%%
 flowchart TB
 
