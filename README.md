@@ -355,3 +355,46 @@ flowchart TB
       MP_desc["Adaptadores entre Command/Query e DTOs\nNormalização/Enriquecimento de dados]()_
 
 ```
+
+# Notifications
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph Notifications["Application/Notifications"]
+    direction TB
+
+    subgraph Events["Events (Application/Domain→App)"]
+      E_desc["Contratos de eventos/notificações\nEx.: UserCreated, ExpenseDeleted"]
+    end
+
+    subgraph Publishers["Publishers"]
+      P_desc["Publicam notificações (in-proc via MediatR ou outbox → broker)\nEx.: NotificationPublisher"]
+    end
+
+    subgraph Handlers["Handlers"]
+      H_desc["Reagem aos eventos (side-effects)\nEx.: enviar e-mail, auditoria, projeções de leitura"]
+    end
+
+    subgraph Adapters["Adapters / Translators (opcional)"]
+      A_desc["Mapeiam DomainEvent → AppNotification\nNormalizam payloads para fila/API externa"]
+    end
+
+    subgraph Outbox["Outbox (opcional)"]
+      O_desc["Tabela de saída transacional\nProcessador de outbox para broker (Rabbit/Kafka)"]
+    end
+
+    subgraph Policies["Policies (opcional)"]
+      PL_desc["Retry/Backoff/Dead-letter\nIdempotência e deduplicação"]
+    end
+  end
+
+  %% Relações
+  Events --> Publishers
+  Publishers --> Handlers
+  Adapters --> Publishers
+  Outbox --> Publishers
+  Policies --> Handlers
+  Policies --> Publishers
+
+  ```
