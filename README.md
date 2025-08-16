@@ -59,3 +59,22 @@ flowchart TB
 
 ```
 
+#Application Architecture
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph Application["Application Layer"]
+    DTOs["DTOs\n+ Entrada/Saída de Dados\n+ Simples e sem lógica de negócio"]
+    Mappers["Mappers\n+ Conversão DTO ⇄ Entities\n+ Isolamento entre camadas"]
+    Interfaces["Interfaces\n+ Contratos p/ Serviços\n+ Abstrações p/ Domain/Infra"]
+    Services["App Services\n+ Orquestram casos de uso\n+ Chama Domain & Infra\n+ Regras de aplicação"]
+    UseCases["UseCases\n+ Casos de Uso específicos\n+ Fluxo de negócio orquestrado"]
+    Validators["Validators (FluentValidation)\n+ Validação de DTOs e Requests"]
+    Handlers["Handlers (Command/Query)\n+ Implementam CQRS\n+ Integração com Mediator"]
+    Notifications["Notifications\n+ Mensagens de domínio convertidas p/ app\n+ Notificação de erros ou eventos"]
+    Exceptions["Exceptions\n+ Tratamento de falhas\n+ Regras de exceção de aplicação"]
+  end
+
+```
