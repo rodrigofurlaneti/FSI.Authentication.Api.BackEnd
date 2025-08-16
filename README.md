@@ -331,29 +331,29 @@ flowchart TB
     direction TB
 
     subgraph Commands["CommandHandlers (Escrita)"]
-      C_desc["Manipulam Commands\nCreate/Update/Delete\nTransação + UoW\nChamam Domain/Repos"]
-      C_examples["Ex.: CreateUserCommandHandler\nUpdateExpenseCommandHandler\nDeleteCategoryCommandHandler"]
+      C_desc["Manipulam Commands Create/Update/Delete Transação + UoW Chamam Domain/Repos"]
+      C_examples["Ex.: CreateUserCommandHandler UpdateExpenseCommandHandler DeleteCategoryCommandHandler"]
     end
 
     subgraph Queries["QueryHandlers (Leitura)"]
-      Q_desc["Manipulam Queries\nConsultas otimizadas\nProjeções para DTOs\nPaginação/Filtros"]
-      Q_examples["Ex.: GetUserByIdQueryHandler\nGetExpensesByCategoryQueryHandler\nListTransactionsPagedHandler"]
+      Q_desc["Manipulam Queries Consultas otimizadas Projeções para DTOs Paginação/Filtros"]
+      Q_examples["Ex.: GetUserByIdQueryHandler GetExpensesByCategoryQueryHandler ListTransactionsPagedHandler"]
     end
 
     subgraph Notifications["NotificationHandlers (Eventos)"]
-      N_desc["Reagem a eventos (publish/subscribe)\nSide-effects: e-mail, auditoria, outbox\nIntegração assíncrona"]
-      N_examples["Ex.: UserCreatedNotificationHandler\nExpenseDeletedNotificationHandler"]
+      N_desc["Reagem a eventos (publish/subscribe) Side-effects: e-mail, auditoria, outbox Integração assíncrona"]
+      N_examples["Ex.: UserCreatedNotificationHandler ExpenseDeletedNotificationHandler"]
     end
 
     subgraph Pipeline["PipelineBehaviors (opcional)"]
-      PB_val["ValidationBehavior\nValida Requests antes do Handler"]
-      PB_log["LoggingBehavior\nMétricas/Tracing/CorrelationId"]
-      PB_retry["RetryBehavior\nPolly/Resiliência (somente leitura ou idempotente)"]
-      PB_perf["PerformanceBehavior\nTempo por handler"]
+      PB_val["ValidationBehavior Valida Requests antes do Handler"]
+      PB_log["LoggingBehavior Métricas/Tracing/CorrelationId"]
+      PB_retry["RetryBehavior Polly/Resiliência (somente leitura ou idempotente)"]
+      PB_perf["PerformanceBehavior Tempo por handler"]
     end
 
     subgraph Mappings["Mappings (opcional)"]
-      MP_desc["Adaptadores entre Command/Query e DTOs\nNormalização/Enriquecimento de dados"]
+      MP_desc["Adaptadores entre Command/Query e DTOs Normalização/Enriquecimento de dados"]
     end
   end
 
@@ -463,27 +463,27 @@ flowchart TB
     direction TB
 
     subgraph Controllers["Controllers"]
-      C_desc["Expondo endpoints REST/GraphQL/gRPC\nChamam Application Services ou Handlers\nEx.: UserController, ExpenseController"]
+      C_desc["Expondo endpoints REST/GraphQL/gRPC Chamam Application Services ou Handlers Ex.: UserController, ExpenseController"]
     end
 
     subgraph Filters["Filters"]
-      F_desc["Filtros de ação e exceção\nEx.: ApiExceptionFilter, ValidationFilter"]
+      F_desc["Filtros de ação e exceção Ex.: ApiExceptionFilter, ValidationFilter"]
     end
 
     subgraph Middleware["Middleware"]
-      M_desc["Pipeline HTTP (Request → Response)\nEx.: ExceptionHandlingMiddleware, CorrelationIdMiddleware"]
+      M_desc["Pipeline HTTP (Request → Response) Ex.: ExceptionHandlingMiddleware, CorrelationIdMiddleware"]
     end
 
     subgraph Auth["Auth / Security"]
-      A_desc["Autenticação e Autorização\nEx.: JWT Bearer, OAuth2, AuthorizationPolicies"]
+      A_desc["Autenticação e Autorização Ex.: JWT Bearer, OAuth2, AuthorizationPolicies"]
     end
 
     subgraph ProblemDetails["ProblemDetails / Error Handling"]
-      PD_desc["Padrão RFC 7807\nMapeamento de exceções p/ HTTP\nEx.: ProblemDetailsFactory, ValidationProblemDetails"]
+      PD_desc["Padrão RFC 7807 Mapeamento de exceções p/ HTTP Ex.: ProblemDetailsFactory, ValidationProblemDetails"]
     end
 
     subgraph Config["Config"]
-      Co_desc["Configurações auxiliares da API\nEx.: SwaggerConfig, ApiVersioningConfig"]
+      Co_desc["Configurações auxiliares da API Ex.: SwaggerConfig, ApiVersioningConfig"]
     end
   end
 
@@ -493,4 +493,46 @@ flowchart TB
   Controllers --> Auth
   Controllers --> ProblemDetails
   Controllers --> Config
+```
+
+# Controller
+```mermaid  
+
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph Controllers["Presentation/Controllers"]
+    direction TB
+
+    subgraph Users["Users"]
+      U_desc["UserController CRUD de usuários Gestão de perfis e permissões"]
+    end
+
+    subgraph Expenses["Expenses"]
+      E_sync["ExpenseControllerSync Operações síncronas (REST direto)"]
+      E_async["ExpenseControllerAsync Operações assíncronas (mensageria, fila)"]
+    end
+
+    subgraph Categories["Categories"]
+      C_desc["CategoryController Gestão de categorias de despesas"]
+    end
+
+    subgraph Transactions["Transactions"]
+      T_desc["TransactionController Gerencia transações financeiras Ex.: registrar, listar, consultar"]
+    end
+
+    subgraph Auth["Auth / Identity"]
+      A_auth["AuthController Login, RefreshToken, Logout"]
+      A_account["AccountController Cadastro e gerenciamento de contas"]
+    end
+
+    subgraph Admin["Admin / Management"]
+      Adm_sys["SystemController Status do sistema, health check"]
+      Adm_mon["MonitoringController Logs, métricas, auditoria"]
+    end
+
+    subgraph Base["Base (opcional)"]
+      B_base["ApiControllerBase Helper p/ respostas padronizadas Ex.: Ok(), Problem(), CreatedAt()"]
+    end
+  end
 ```
