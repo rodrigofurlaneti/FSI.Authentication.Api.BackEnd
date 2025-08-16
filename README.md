@@ -536,3 +536,35 @@ flowchart TB
     end
   end
 ```
+
+# Filters
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph Filters["Presentation/Filters"]
+    direction TB
+
+    subgraph ExceptionFilters["ExceptionFilters"]
+      Ex1["ApiExceptionFilter\nCaptura exceções → ProblemDetails"]
+      Ex2["DomainExceptionFilter\nDomainException → ApplicationException"]
+    end
+
+    subgraph ValidationFilters["ValidationFilters"]
+      V1["ValidationFilter\nValida ModelState/DTOs\nIntegra FluentValidation"]
+    end
+
+    subgraph ActionFilters["ActionFilters"]
+      A1["LoggingActionFilter\nLog de requests/responses"]
+      A2["AuditActionFilter\nAuditoria de chamadas críticas"]
+    end
+
+    subgraph AuthorizationFilters["AuthorizationFilters"]
+      AU1["RoleAuthorizationFilter\nRegras customizadas de roles/policies"]
+    end
+
+    subgraph ResultFilters["ResultFilters"]
+      R1["ResponseWrapperFilter\nPadroniza formato de resposta (ex.: envelopar em { data, errors })"]
+    end
+  end
+```
