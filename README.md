@@ -1149,21 +1149,21 @@ flowchart TB
     direction TB
 
     subgraph Controllers["Controllers"]
-      C_Users["Users UserController"]
-      C_Expenses["Expenses ExpenseControllerSync ExpenseControllerAsync"]
-      C_Categories["Categories CategoryController"]
-      C_Transactions["Transactions TransactionController"]
-      C_Auth["Auth AuthController AccountController"]
-      C_Admin["Admin SystemController MonitoringController DiagnosticsController JobsController"]
-      C_Base["Base (opcional) ApiControllerBase"]
+      C_Users["Users\nUserController"]
+      C_Expenses["Expenses\nExpenseControllerSync\nExpenseControllerAsync"]
+      C_Categories["Categories\nCategoryController"]
+      C_Transactions["Transactions\nTransactionController"]
+      C_Auth["Auth\nAuthController\nAccountController"]
+      C_Admin["Admin\nSystemController\nMonitoringController\nDiagnosticsController\nJobsController"]
+      C_Base["Base (opcional)\nApiControllerBase"]
     end
 
     subgraph Filters["Filters"]
-      F_Exception["ExceptionFilters ApiExceptionFilter DomainExceptionFilter"]
-      F_Validation["ValidationFilters ValidationFilter"]
-      F_Action["ActionFilters LoggingActionFilter AuditActionFilter"]
-      F_Author["AuthorizationFilters RoleAuthorizationFilter"]
-      F_Result["ResultFilters ResponseWrapperFilter"]
+      F_Exception["ExceptionFilters\nApiExceptionFilter\nDomainExceptionFilter"]
+      F_Validation["ValidationFilters\nValidationFilter"]
+      F_Action["ActionFilters\nLoggingActionFilter\nAuditActionFilter"]
+      F_Author["AuthorizationFilters\nRoleAuthorizationFilter"]
+      F_Result["ResultFilters\nResponseWrapperFilter"]
     end
 
     subgraph Middleware["Middleware"]
@@ -1178,42 +1178,42 @@ flowchart TB
     end
 
     subgraph Auth["Auth / Security"]
-      A_Jwt["JWT JwtAuthenticationConfig JwtTokenService JwtBearerEventsHandler"]
-      A_Policies["Policies AuthorizationPolicies PolicyNames"]
-      A_Claims["Claims ClaimsExtensions ClaimTypesCustom"]
-      A_Identity["Identity (opcional) IdentityConfig ApplicationUser"]
-      A_Providers["External Providers (opcional) OAuth2ProviderConfig ExternalLoginService"]
-      A_Utils["Utils PasswordHasher TokenValidationParametersFactory"]
+      A_Jwt["JWT\nJwtAuthenticationConfig\nJwtTokenService\nJwtBearerEventsHandler"]
+      A_Policies["Policies\nAuthorizationPolicies\nPolicyNames"]
+      A_Claims["Claims\nClaimsExtensions\nClaimTypesCustom"]
+      A_Identity["Identity (opcional)\nIdentityConfig\nApplicationUser"]
+      A_Providers["External Providers (opcional)\nOAuth2ProviderConfig\nExternalLoginService"]
+      A_Utils["Utils\nPasswordHasher\nTokenValidationParametersFactory"]
     end
 
     subgraph ProblemDetails["ProblemDetails (RFC 7807)"]
-      PD_Factory["Factory ProblemDetailsFactory ProblemDetailsOptions"]
-      PD_Mapping["Mapping ExceptionToProblemDetailsMapper ErrorCodeToProblemTypeMapper"]
-      PD_Models["Models ExtendedProblemDetails ValidationProblemDetailsEx"]
-      PD_Writers["Writers ProblemDetailsWriter"]
-      PD_Ext["Extensions HttpContextProblemExtensions ProblemDetailsExtensions"]
+      PD_Factory["Factory\nProblemDetailsFactory\nProblemDetailsOptions"]
+      PD_Mapping["Mapping\nExceptionToProblemDetailsMapper\nErrorCodeToProblemTypeMapper"]
+      PD_Models["Models\nExtendedProblemDetails\nValidationProblemDetailsEx"]
+      PD_Writers["Writers\nProblemDetailsWriter"]
+      PD_Ext["Extensions\nHttpContextProblemExtensions\nProblemDetailsExtensions"]
     end
 
     subgraph Admin["Admin"]
-      ADT_DTOs["DTOs HealthReportDto BuildInfoDto JobTriggerRequest"]
-      ADT_Services["Services HealthCheckService DiagnosticsService BuildInfoProvider"]
-      ADT_Auth["Auth AdminAuthorizationPolicy ApiKeyValidator"]
-      ADT_Filters["Filters AdminAuditActionFilter"]
+      ADT_DTOs["DTOs\nHealthReportDto\nBuildInfoDto\nJobTriggerRequest"]
+      ADT_Services["Services\nHealthCheckService\nDiagnosticsService\nBuildInfoProvider"]
+      ADT_Auth["Auth\nAdminAuthorizationPolicy\nApiKeyValidator"]
+      ADT_Filters["Filters\nAdminAuditActionFilter"]
     end
 
     subgraph Models["Models (opcional)"]
-      M_Req["Requests Auth: LoginModel, RefreshTokenModel Users: Create/UpdateUserModel Expenses: CreateExpenseModel, ImportExpensesCsvModel Common: PaginationModel, DateRangeModel"]
-      M_Res["Responses Users: UserViewModel Expenses: ExpenseViewModel, ExpenseSummaryViewModel Common: PagedResultModel"]
-      M_Bind["Bindings CustomModelBinders MultipartFormBinders"]
+      M_Req["Requests\nAuth: LoginModel, RefreshTokenModel\nUsers: Create/UpdateUserModel\nExpenses: CreateExpenseModel, ImportExpensesCsvModel\nCommon: PaginationModel, DateRangeModel"]
+      M_Res["Responses\nUsers: UserViewModel\nExpenses: ExpenseViewModel, ExpenseSummaryViewModel\nCommon: PagedResultModel"]
+      M_Bind["Bindings\nCustomModelBinders\nMultipartFormBinders"]
     end
 
     subgraph Config["Config"]
-      CFG_Swagger["Swagger SwaggerConfig SwaggerAuthConfig"]
-      CFG_Version["Versioning ApiVersioningConfig ApiExplorerConfig"]
-      CFG_Cors["CORS CorsConfig"]
-      CFG_Json["JSON JsonOptionsConfig ProblemDetailsConfig"]
-      CFG_Rate["RateLimiting (opcional) RateLimitingConfig"]
-      CFG_Health["HealthChecks (opcional) HealthChecksConfig"]
+      CFG_Swagger["Swagger\nSwaggerConfig\nSwaggerAuthConfig"]
+      CFG_Version["Versioning\nApiVersioningConfig\nApiExplorerConfig"]
+      CFG_Cors["CORS\nCorsConfig"]
+      CFG_Json["JSON\nJsonOptionsConfig\nProblemDetailsConfig"]
+      CFG_Rate["RateLimiting (opcional)\nRateLimitingConfig"]
+      CFG_Health["HealthChecks (opcional)\nHealthChecksConfig"]
     end
   end
 
@@ -1242,7 +1242,7 @@ flowchart TB
       I_Services["Services"]
       I_Msg["Messaging (opcional)"]
       I_Ext["External / Gateways (opcional)"]
-      I_Common["Common (opcional) IUnitOfWork ILoggerAdapter"]
+      I_Common["Common (opcional)\nIUnitOfWork\nILoggerAdapter"]
     end
 
     subgraph Services["Services"]
@@ -1261,16 +1261,16 @@ flowchart TB
     end
 
     subgraph Validators["Validators"]
-      V_Features["Features (por módulo) Users/Expenses/Categories ..."]
-      V_Common["Common / Shared Rules Extensions Messages Helpers"]
-      V_Beh["Pipeline (opcional) ValidationBehavior ValidationFailureAdapter"]
+      V_Features["Features (por módulo)\nUsers/Expenses/Categories ..."]
+      V_Common["Common / Shared\nRules\nExtensions\nMessages\nHelpers"]
+      V_Beh["Pipeline (opcional)\nValidationBehavior\nValidationFailureAdapter"]
     end
 
     subgraph Handlers["Handlers (CQRS)"]
       H_Cmd["CommandHandlers (Escrita)"]
       H_Qry["QueryHandlers (Leitura)"]
       H_Notif["NotificationHandlers (Eventos)"]
-      H_Pipe["PipelineBehaviors (opcional) Validation/Logging/Retry/Performance"]
+      H_Pipe["PipelineBehaviors (opcional)\nValidation/Logging/Retry/Performance"]
       H_Map["Mappings (opcional)"]
     end
 
@@ -1284,9 +1284,9 @@ flowchart TB
     end
 
     subgraph Exceptions["Exceptions"]
-      E_Types["Types ApplicationException base Validation/NotFound/Conflict/Unauthorized/Forbidden/BusinessRule"]
+      E_Types["Types\nApplicationException base\nValidation/NotFound/Conflict/Unauthorized/Forbidden/BusinessRule"]
       E_Map["Mapping / ProblemDetails"]
-      E_Tr["Translators Domain/Infra → Application"]
+      E_Tr["Translators\nDomain/Infra → Application"]
       E_MW["Middleware / Filters"]
       E_Pol["Policies (opcional)"]
       E_Codes["ErrorCodes / Messages"]
@@ -1296,35 +1296,35 @@ flowchart TB
   %% ==== Domain Layer ====
   subgraph Domain["Domain Layer"]
     direction TB
-    D_Entities["Entities User Expense Transaction Category"]
-    D_VO["ValueObjects Money Email Document (CPF/CNPJ) DateRange"]
-    D_Services["Domain Services ExpenseDomainService TransactionDomainService"]
-    D_Events["Domain Events UserCreatedDomainEvent ExpenseDeletedDomainEvent"]
-    D_Specs["Specifications (opcional) ExpenseOverLimitSpec ActiveUserSpec"]
-    D_Ex["Exceptions DomainException InvalidMoneyException"]
-    D_Agg["Aggregates ExpenseAggregate TransactionAggregate"]
+    D_Entities["Entities\nUser\nExpense\nTransaction\nCategory"]
+    D_VO["ValueObjects\nMoney\nEmail\nDocument (CPF/CNPJ)\nDateRange"]
+    D_Services["Domain Services\nExpenseDomainService\nTransactionDomainService"]
+    D_Events["Domain Events\nUserCreatedDomainEvent\nExpenseDeletedDomainEvent"]
+    D_Specs["Specifications (opcional)\nExpenseOverLimitSpec\nActiveUserSpec"]
+    D_Ex["Exceptions\nDomainException\nInvalidMoneyException"]
+    D_Agg["Aggregates\nExpenseAggregate\nTransactionAggregate"]
   end
 
   %% ==== Infrastructure Layer ====
   subgraph Infrastructure["Infrastructure Layer"]
     direction TB
-    INF_Repos["Repositories (Procs/Dapper/EF) Implementações de I*Repository SQL/Stored Procedures"]
-    INF_Msg["Messaging Producer/Consumer Config de filas"]
+    INF_Repos["Repositories (Procs/Dapper/EF)\nImplementações de I*Repository\nSQL/Stored Procedures"]
+    INF_Msg["Messaging\nProducer/Consumer\nConfig de filas"]
     INF_Outbox["Outbox Processor"]
-    INF_Persist["Persistence DbContext/Connections"]
+    INF_Persist["Persistence\nDbContext/Connections"]
     INF_Migr["Migrations / Scripts"]
   end
 
   %% ==== Worker Layer ====
   subgraph Worker["Worker Layer"]
     direction TB
-    W_Jobs["Jobs cleanup audit rotinas"]
-    W_Consumers["Message Consumers (assíncrono)"]
+    W_Jobs["Jobs\ncleanup\naudit\nrotinas"]
+    W_Consumers["Message Consumers\n(assíncrono)"]
   end
 
   %% ==== Recursos Externos ====
-  DB[(SQL Server Stored Procedures)]
-  Broker{{Message Broker RabbitMQ / Kafka}}
+  DB[(SQL Server\nStored Procedures)]
+  Broker{{Message Broker\nRabbitMQ / Kafka}}
 
   %% ==== Fluxos ====
   Clients --> Presentation
