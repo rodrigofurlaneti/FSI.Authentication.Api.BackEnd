@@ -1,7 +1,11 @@
 ```mermaid
+
 %%{init: {"flowchart": {"htmlLabels": false}} }%%
 flowchart TB
 
+  %% ==========================
+  %% ARQUITETURA GERAL
+  %% ==========================
   subgraph Clients["Clients"]
     Web["Web App"]
     Mobile["Mobile App"]
@@ -46,9 +50,10 @@ flowchart TB
   Worker --> Broker
 
 
-
-%% CAMADA APPLICATION — Árvore completa
-flowchart TB
+  %% ==========================
+  %% CAMADA APPLICATION — Árvore completa
+  %% ==========================
+  flowchart TB
 
   A["/Application"] --> B["/Contracts"]
   B --> B1["/Requests"]
@@ -101,8 +106,11 @@ flowchart TB
   H --> H1["ApplicationException.cs"]
   H --> H2["ValidationException.cs"]
 
+
+  %% ==========================
   %% CAMADA APPLICATION — Função de cada pasta (descrições)
-flowchart LR
+  %% ==========================
+  flowchart LR
 
   Contracts["/Contracts"] -->|Entrada/Saída| DescContracts["DTOs de Request/Response\n+ Interfaces de Serviços de Aplicação\nExpõem a API da camada para a Presentation.\nSem regras de negócio."]
   UseCases["/UseCases"] -->|Orquestra| DescUseCases["Casos de uso (Application Services)\nCoordenam fluxo: validar → chamar Domain/Infra → montar Response.\nSem lógica de domínio."]
@@ -112,7 +120,6 @@ flowchart LR
   Behaviors["/Behaviors (opcional)"] -->|Pipeline| DescBehaviors["Cross-cutting em pipeline (ex.: MediatR):\nLogging, Validation, Performance, Retry.\nNão contém regra de domínio."]
   Exceptions["/Exceptions (opcional)"] -->|Erros| DescExceptions["Exceções específicas da camada Application\npara padronizar falhas controladas."]
 
-  %% Agrupamento visual
   subgraph Application["Application Layer (DDD/CQRS)"]
     Contracts
     UseCases
