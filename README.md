@@ -546,25 +546,45 @@ flowchart TB
     direction TB
 
     subgraph ExceptionFilters["ExceptionFilters"]
-      Ex1["ApiExceptionFilter\nCaptura exceções → ProblemDetails"]
-      Ex2["DomainExceptionFilter\nDomainException → ApplicationException"]
+      Ex1["ApiExceptionFilter Captura exceções → ProblemDetails"]
+      Ex2["DomainExceptionFilter DomainException → ApplicationException"]
     end
 
     subgraph ValidationFilters["ValidationFilters"]
-      V1["ValidationFilter\nValida ModelState/DTOs\nIntegra FluentValidation"]
+      V1["ValidationFilter Valida ModelState/DTOs Integra FluentValidation"]
     end
 
     subgraph ActionFilters["ActionFilters"]
-      A1["LoggingActionFilter\nLog de requests/responses"]
-      A2["AuditActionFilter\nAuditoria de chamadas críticas"]
+      A1["LoggingActionFilter Log de requests/responses"]
+      A2["AuditActionFilter Auditoria de chamadas críticas"]
     end
 
     subgraph AuthorizationFilters["AuthorizationFilters"]
-      AU1["RoleAuthorizationFilter\nRegras customizadas de roles/policies"]
+      AU1["RoleAuthorizationFilter Regras customizadas de roles/policies"]
     end
 
     subgraph ResultFilters["ResultFilters"]
-      R1["ResponseWrapperFilter\nPadroniza formato de resposta (ex.: envelopar em { data, errors })"]
+      R1["ResponseWrapperFilter Padroniza formato de resposta (ex.: envelopar em { data, errors })"]
     end
   end
 ```
+
+# Middleware
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph Middleware["Presentation/Middleware"]
+    direction TB
+
+    Ex["ExceptionHandlingMiddleware Captura exceções globais → ProblemDetails"]
+    Corr["CorrelationIdMiddleware Gera e propaga CorrelationId p/ rastreamento"]
+    Log["LoggingMiddleware Log de Request/Response + Métricas básicas"]
+    Time["RequestTimingMiddleware Mede tempo de execução + Telemetria/Tracing"]
+    Auth["AuthenticationMiddleware (opcional) Autenticação customizada/OAuth2"]
+    Rate["RateLimitingMiddleware (opcional) Controle de chamadas Throttling/Quota"]
+    Cache["CachingMiddleware (opcional) Cache de respostas"]
+    Sec["SecurityHeadersMiddleware (opcional) Headers de segurança: CSP, CORS, HSTS"]
+  end
+
+  ```
