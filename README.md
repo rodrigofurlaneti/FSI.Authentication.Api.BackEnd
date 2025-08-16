@@ -1,4 +1,5 @@
 ```mermaid
+
 %% =====================================================================
 %% Arquitetura da Application Layer - FSI.Authentication
 %% =====================================================================
@@ -32,6 +33,10 @@ flowchart TB
     end
   end
 
+```
+```mermaid
+
+
   DB[(SQL Server\nStored Procedures)]
   Broker{{Message Broker\nRabbitMQ / Kafka}}
 
@@ -48,6 +53,10 @@ flowchart TB
   Infrastructure --> Broker
   Worker --> DB
   Worker --> Broker
+
+```
+
+```mermaid
 
 %% =====================================================================
 %% DETALHAMENTO DA APPLICATION LAYER (PASTAS E ARQUIVOS)
