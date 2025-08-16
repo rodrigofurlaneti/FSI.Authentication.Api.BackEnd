@@ -629,3 +629,45 @@ flowchart TB
     end
   end
   ```
+  # ProblemDetails
+  ```mermaid
+  %%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph ProblemDetails["Presentation/ProblemDetails"]
+    direction TB
+
+    subgraph Factory["Factory"]
+      F1["ProblemDetailsFactory\nCria ProblemDetails/ValidationProblemDetails"]
+      F2["ProblemDetailsOptions\nMapa status→type/title, env, links"]
+    end
+
+    subgraph Mapping["Mapping"]
+      M1["ExceptionToProblemDetailsMapper\nException → ProblemDetails"]
+      M2["ErrorCodeToProblemTypeMapper\nErrorCode → type (URI), title"]
+    end
+
+    subgraph Models["Models"]
+      Md1["ExtendedProblemDetails\n+ traceId, errorCode, instance, details"]
+      Md2["ValidationProblemDetailsEx\n+ fieldErrors (FluentValidation)"]
+    end
+
+    subgraph Writers["Writers"]
+      W1["ProblemDetailsWriter\nSerialização: content-type, casing, RFC7807"]
+    end
+
+    subgraph Extensions["Extensions"]
+      E1["HttpContextProblemExtensions\nAdd traceId/instance/links"]
+      E2["ProblemDetailsExtensions\nAppend metadados/códigos"]
+    end
+  end
+
+  %% Relações
+  Factory --> Mapping
+  Mapping --> Models
+  Writers --> Models
+  Extensions --> Factory
+  Extensions --> Writers
+
+  ```
+
