@@ -482,10 +482,6 @@ flowchart TB
       PD_desc["Padrão RFC 7807\nMapeamento de exceções p/ HTTP\nEx.: ProblemDetailsFactory, ValidationProblemDetails"]
     end
 
-    subgraph Models["Models (opcional)"]
-      Mo_desc["Modelos de entrada p/ endpoints\nSe não usar DTO diretamente\nEx.: LoginModel, RegisterModel"]
-    end
-
     subgraph Config["Config"]
       Co_desc["Configurações auxiliares da API\nEx.: SwaggerConfig, ApiVersioningConfig"]
     end
@@ -496,6 +492,5 @@ flowchart TB
   Controllers --> Middleware
   Controllers --> Auth
   Controllers --> ProblemDetails
-  Controllers --> Models
   Controllers --> Config
 ```
