@@ -140,7 +140,6 @@
       ├── Jobs
       └── Consumers
 
-
 📦 src
  ├── Clients                          # Camada de clientes que consomem a API
  │    ├── Web                         # Aplicação Web
