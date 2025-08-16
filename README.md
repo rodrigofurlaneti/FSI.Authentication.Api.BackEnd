@@ -288,3 +288,35 @@ flowchart TB
   Queries --> Events
   Events --> Pipelines
 ```
+
+# Validators
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph Validators["Application/Validators"]
+    direction TB
+
+    subgraph Features["Features (por módulo)"]
+      UsersV["Users • CreateUserRequestValidator • UpdateUserRequestValidator"]
+      ExpensesV["Expenses • CreateExpenseRequestValidator • UpdateExpenseRequestValidator"]
+      CategoriesV["Categories • CreateCategoryRequestValidator"]
+    end
+
+    subgraph Common["Common / Shared"]
+      Rules["Rules • Regras reutilizáveis • Ex.: CpfRule, EmailRule, MoneyRule"]
+      Extensions["Extensions • Métodos de extensão FluentValidation • Ex.: NotEmptyTrimmed(), ValidEnum()"]
+      Messages["Messages / ErrorCodes • Mensagens padronizadas • Enum de códigos de erro"]
+      Helpers["Helpers • Utilidades de validação • Normalização, regex, datas"]
+    end
+
+    subgraph Pipeline["Pipeline (opcional)"]
+      Behavior["ValidationBehavior<TReq,TRes> • Executa validação antes do Handler • Agrega erros em ProblemDetails"]
+      Adapt["Adapters (opcional) • Mapeia ValidationFailure → Error DTO"]
+    end
+  end
+
+  %% Relações
+  Common --> Features
+  Pipeline --> Features
+```
