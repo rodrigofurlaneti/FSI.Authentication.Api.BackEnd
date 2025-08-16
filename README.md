@@ -129,17 +129,16 @@
   - **Jobs** — *Tarefas agendadas (limpeza, auditoria, batch)*
   - **Consumers** — *Consumidores de mensagens (RabbitMQ/Kafka)*
 
-
-
 ```mermaid
-
-
 erDiagram
     DOMAIN_ENTITIES ||--o{ APPLICATION_DTOs : "mapped_to"
     APPLICATION_USECASES ||--|| INFRASTRUCTURE_REPOSITORIES : "uses"
     INFRASTRUCTURE_REPOSITORIES }o--|| DOMAIN_ENTITIES : "persists"
     PRESENTATION_CONTROLLERS ||--|| APPLICATION_USECASES : "invokes"
     WORKER_CONSUMERS }o--|| INFRASTRUCTURE_OUTBOX : "processes"
+```
+
+```mermaid
 
 
 %%{init: {"flowchart": {"htmlLabels": false}} }%%
