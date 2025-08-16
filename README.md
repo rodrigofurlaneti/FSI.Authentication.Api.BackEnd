@@ -638,27 +638,27 @@ flowchart TB
     direction TB
 
     subgraph Factory["Factory"]
-      F1["ProblemDetailsFactory\nCria ProblemDetails/ValidationProblemDetails"]
-      F2["ProblemDetailsOptions\nMapa status→type/title, env, links"]
+      F1["ProblemDetailsFactory Cria ProblemDetails/ValidationProblemDetails"]
+      F2["ProblemDetailsOptions Mapa status→type/title, env, links"]
     end
 
     subgraph Mapping["Mapping"]
-      M1["ExceptionToProblemDetailsMapper\nException → ProblemDetails"]
-      M2["ErrorCodeToProblemTypeMapper\nErrorCode → type (URI), title"]
+      M1["ExceptionToProblemDetailsMapper Exception → ProblemDetails"]
+      M2["ErrorCodeToProblemTypeMapper ErrorCode → type (URI), title"]
     end
 
     subgraph Models["Models"]
-      Md1["ExtendedProblemDetails\n+ traceId, errorCode, instance, details"]
-      Md2["ValidationProblemDetailsEx\n+ fieldErrors (FluentValidation)"]
+      Md1["ExtendedProblemDetails + traceId, errorCode, instance, details"]
+      Md2["ValidationProblemDetailsEx + fieldErrors (FluentValidation)"]
     end
 
     subgraph Writers["Writers"]
-      W1["ProblemDetailsWriter\nSerialização: content-type, casing, RFC7807"]
+      W1["ProblemDetailsWriter Serialização: content-type, casing, RFC7807"]
     end
 
     subgraph Extensions["Extensions"]
-      E1["HttpContextProblemExtensions\nAdd traceId/instance/links"]
-      E2["ProblemDetailsExtensions\nAppend metadados/códigos"]
+      E1["HttpContextProblemExtensions Add traceId/instance/links"]
+      E2["ProblemDetailsExtensions Append metadados/códigos"]
     end
   end
 
@@ -671,3 +671,46 @@ flowchart TB
 
   ```
 
+  # Admin / Management
+  ```mermaid
+  %%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph Admin["Presentation/Admin"]
+    direction TB
+
+    subgraph Controllers["Controllers"]
+      Sys["SystemController Health, uptime, build info"]
+      Mon["MonitoringController Métricas/Tracing/Logs (views)"]
+      Dia["DiagnosticsController Dumps, threads, GC (restrito)"]
+      Jobs["JobsController Disparo de jobs/reprocessos (auditado)"]
+    end
+
+    subgraph Services["Services"]
+      Hc["HealthCheckService Aggrega IHealthChecks e dependências"]
+      Dx["DiagnosticsService GC/Threads/Memory/Process info"]
+      Build["BuildInfoProvider Versão/commit/data/env"]
+    end
+
+    subgraph Auth["Auth"]
+      Pol["AdminAuthorizationPolicy Role/Claim obrigatória"]
+      Key["ApiKeyValidator (opcional) Dupla verificação p/ rotas sensíveis"]
+    end
+
+    subgraph DTOs["DTOs"]
+      Hdto["HealthReportDto"]
+      Bdto["BuildInfoDto"]
+      Jreq["JobTriggerRequest"]
+    end
+
+    subgraph Filters["Filters"]
+      Aud["AdminAuditActionFilter Auditoria de ações administrativas"]
+    end
+  end
+
+  %% Relações
+  Controllers --> Services
+  Controllers --> Auth
+  Controllers --> DTOs
+  Controllers --> Filters
+  ```
