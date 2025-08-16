@@ -255,3 +255,36 @@ flowchart TB
   AppServices --> Orchestrators
   AppServices --> Decorators
 ```
+
+# UseCases
+```mermaid
+
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph UseCases["Application/UseCases"]
+    direction TB
+
+    subgraph Commands["Commands"]
+      C_desc["Casos de uso de escrita Create, Update, Delete Ex.: CreateUserCommand, UpdateExpenseCommand"]
+    end
+
+    subgraph Queries["Queries"]
+      Q_desc["Casos de uso de leitura Consultas e relatórios Ex.: GetUserByIdQuery, GetExpensesByCategoryQuery"]
+    end
+
+    subgraph Events["Events / Notifications (opcional)"]
+      E_desc["Casos de uso disparados por eventos Ex.: UserCreatedEventHandler, ExpenseDeletedEventHandler"]
+    end
+
+    subgraph Pipelines["Pipelines / Interactors (opcional)"]
+      P_desc["Fluxos compostos de múltiplos casos de uso Ex.: CloseMonthInteractor"]
+    end
+  end
+
+  %% Relações
+  Commands --> Queries
+  Commands --> Events
+  Queries --> Events
+  Events --> Pipelines
+```
