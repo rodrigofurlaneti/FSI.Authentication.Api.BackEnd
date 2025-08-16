@@ -33,8 +33,8 @@ flowchart TB
   end
 
   %% === DB & Broker separados ===
-  DB[(SQL Server\nStored Procedures)]
-  Broker{{Message Broker\nRabbitMQ / Kafka}}
+  DB[(SQL Server Stored Procedures)]
+  Broker{{Message Broker RabbitMQ / Kafka}}
 
   %% === Worker ===
   subgraph Worker["Worker Layer"]
@@ -109,23 +109,23 @@ flowchart TB
     direction TB
 
     subgraph Requests["Requests"]
-      R_desc["Entrada da API\nValidação antes do Domain\nSomente dados (sem regra)"]
-      R_examples["Exemplos:\nCreateUserRequest\nUpdateExpenseRequest\nSearchExpenseRequest"]
+      R_desc["Entrada da API Validação antes do Domain Somente dados (sem regra)"]
+      R_examples["Exemplos: CreateUserRequest UpdateExpenseRequest SearchExpenseRequest"]
     end
 
     subgraph Responses["Responses"]
-      S_desc["Saída da API\nModelos de retorno/paginação\nSem lógica de negócio"]
-      S_examples["Exemplos:\nUserResponse\nExpenseSummaryResponse\nPagedResultResponse"]
+      S_desc["Saída da API Modelos de retorno/paginação Sem lógica de negócio"]
+      S_examples["Exemplos: UserResponse ExpenseSummaryResponse PagedResultResponse"]
     end
 
     subgraph Shared["Shared / Common (opcional)"]
-      Sh_desc["Tipos reutilizáveis\nEndereço, Documento, Paginação, Filtros"]
-      Sh_examples["Exemplos:\nAddressDto\nDocumentDto\nPaginationDto\nFilterDto"]
+      Sh_desc["Tipos reutilizáveis Endereço, Documento, Paginação, Filtros"]
+      Sh_examples["Exemplos: AddressDto DocumentDto PaginationDto FilterDto"]
     end
 
     subgraph Profiles["Profiles / MappingConfig (opcional)"]
-      P_desc["Configurações de mapping (AutoMapper)\nPerfil por agregado / feature"]
-      P_examples["Exemplos:\nUserProfile\nExpenseProfile"]
+      P_desc["Configurações de mapping (AutoMapper) Perfil por agregado / feature"]
+      P_examples["Exemplos: UserProfile ExpenseProfile"]
     end
   end
 
