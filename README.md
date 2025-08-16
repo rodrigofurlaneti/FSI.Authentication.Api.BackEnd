@@ -1,3 +1,145 @@
+📦 src
+ ├── Clients                          # Camada de clientes que consomem a API
+ │    ├── Web                         # Aplicação Web
+ │    ├── Mobile                      # Aplicativo Mobile
+ │    └── Partner                     # Integrações com sistemas/parceiros externos
+ │
+ ├── Presentation                     # Camada de apresentação (API / Controllers)
+ │    ├── Controllers                 # Endpoints HTTP expostos aos clientes
+ │    │    ├── Users                  # Controladores de usuários
+ │    │    ├── Expenses               # Controladores de despesas (sync/async)
+ │    │    ├── Categories             # Controladores de categorias
+ │    │    ├── Transactions           # Controladores de transações financeiras
+ │    │    ├── Auth                   # Autenticação/autorização (login, tokens)
+ │    │    ├── Admin                  # Endpoints administrativos (monitoramento, jobs)
+ │    │    └── Base                   # Controller base com helpers padrão
+ │    │
+ │    ├── Filters                     # Filtros globais de requisição/resposta
+ │    │    ├── ExceptionFilters        # Converte exceções em ProblemDetails
+ │    │    ├── ValidationFilters       # Validação de inputs/DTOs
+ │    │    ├── ActionFilters           # Logging e auditoria de ações
+ │    │    ├── AuthorizationFilters    # Regras de autorização customizadas
+ │    │    └── ResultFilters           # Padroniza formato das respostas
+ │    │
+ │    ├── Middleware                  # Pipeline HTTP (logging, exceptions, tracing)
+ │    │
+ │    ├── Auth                        # Configuração de autenticação/autorização
+ │    │    ├── Jwt                     # Configuração JWT (tokens)
+ │    │    ├── Policies                # Regras de acesso (roles, claims)
+ │    │    ├── Claims                  # Extensões e tipos de claims
+ │    │    ├── Identity                # Integração com ASP.NET Identity
+ │    │    ├── Providers               # Login externo (Google, MS, Facebook)
+ │    │    └── Utils                   # Utilidades de segurança (hash, validação)
+ │    │
+ │    ├── ProblemDetails              # Padronização de erros (RFC 7807)
+ │    │    ├── Factory                 # Criação de objetos ProblemDetails
+ │    │    ├── Mapping                 # Mapeia exceptions → problem types
+ │    │    ├── Models                  # Estruturas extendidas de erros
+ │    │    ├── Writers                 # Escrita serializada (JSON)
+ │    │    └── Extensions              # Helpers e extensões de contexto
+ │    │
+ │    ├── Admin                       # APIs administrativas/operacionais
+ │    │    ├── Controllers             # HealthCheck, Monitoramento, Jobs
+ │    │    ├── Services                # Serviços de diagnóstico e info de build
+ │    │    ├── Auth                    # Regras extras de autenticação admin
+ │    │    ├── DTOs                    # Modelos de resposta de health/build
+ │    │    └── Filters                 # Auditoria de ações administrativas
+ │    │
+ │    ├── Models                      # Modelos de binding (entrada/saída da API)
+ │    │    ├── Requests                # Modelos de entrada (POST/PUT)
+ │    │    ├── Responses               # Modelos de saída (GET/DTOs de retorno)
+ │    │    └── Bindings                # Model binders customizados (arquivos, CSV)
+ │    │
+ │    └── Config                      # Configurações auxiliares
+ │         ├── Swagger                 # Documentação OpenAPI
+ │         ├── Versioning              # Versionamento da API
+ │         ├── Cors                    # Políticas CORS
+ │         ├── Json                    # Serialização JSON
+ │         ├── RateLimiting            # Limite de requisições
+ │         └── HealthChecks            # Configuração de health checks
+ │
+ ├── Application                      # Camada de aplicação (regras de orquestração)
+ │    ├── DTOs                        # Objetos de transporte (entrada/saída)
+ │    │    ├── Requests                # DTOs de entrada
+ │    │    ├── Responses               # DTOs de saída
+ │    │    ├── Shared                  # DTOs comuns/reutilizáveis
+ │    │    └── Profiles                # Perfis de mapeamento (AutoMapper)
+ │    │
+ │    ├── Mappers                     # Conversão entre DTOs e Entities
+ │    │    ├── Profiles                # Configurações de mapping
+ │    │    ├── Converters              # Conversões complexas
+ │    │    ├── Resolvers               # Resolvedores de propriedades
+ │    │    ├── Transformers            # Transformações globais
+ │    │    ├── Extensions              # Métodos de extensão de mapping
+ │    │    └── Config                  # Registro de perfis
+ │    │
+ │    ├── Interfaces                  # Contratos da camada Application
+ │    │    ├── Repositories            # Interfaces de persistência
+ │    │    ├── Services                # Interfaces de serviços de aplicação
+ │    │    ├── Messaging               # Interfaces de mensageria
+ │    │    ├── External                # Integrações externas (gateways)
+ │    │    └── Common                  # Interfaces utilitárias
+ │    │
+ │    ├── Services                    # Serviços de aplicação
+ │    │    ├── AppServices             # Orquestram casos de uso
+ │    │    ├── CommandHandlers         # Manipulam Commands (escrita)
+ │    │    ├── QueryHandlers           # Manipulam Queries (leitura)
+ │    │    ├── Orchestrators           # Coordenam fluxos complexos
+ │    │    └── Decorators              # Cross-cutting concerns (logging, retry)
+ │    │
+ │    ├── UseCases                    # Casos de uso específicos
+ │    │    ├── Commands                # Ações de escrita (criar/atualizar/excluir)
+ │    │    ├── Queries                 # Consultas/leitura
+ │    │    ├── Events                  # Casos disparados por eventos
+ │    │    └── Pipelines               # Fluxos que agrupam múltiplos casos
+ │    │
+ │    ├── Validators                  # Validação de DTOs e requests
+ │    │    ├── Features                # Validadores por módulo/feature
+ │    │    ├── Common                  # Regras compartilhadas
+ │    │    └── Pipeline                # Behaviors de validação em CQRS
+ │    │
+ │    ├── Handlers                    # Manipuladores CQRS
+ │    │    ├── Commands                # Manipuladores de escrita
+ │    │    ├── Queries                 # Manipuladores de leitura
+ │    │    ├── Notifications           # Manipuladores de eventos
+ │    │    ├── Pipeline                # Pipeline behaviors (validação, log, retry)
+ │    │    └── Mappings                # Adaptação Command/Query ⇄ DTO
+ │    │
+ │    ├── Notifications               # Eventos/notificações de aplicação
+ │    │    ├── Events                  # Definição dos eventos
+ │    │    ├── Publishers              # Publicadores de eventos
+ │    │    ├── Handlers                # Manipuladores dos eventos
+ │    │    ├── Adapters                # Adaptação de eventos de domínio
+ │    │    ├── Outbox                  # Implementação do Outbox pattern
+ │    │    └── Policies                # Políticas de retry, idempotência
+ │    │
+ │    └── Exceptions                  # Exceções de aplicação
+ │         ├── Types                   # Tipos de exceções
+ │         ├── Mapping                 # Mapeamento para ProblemDetails
+ │         ├── Translators             # Tradução Domain/Infra → Application
+ │         ├── Middleware              # Tratamento centralizado
+ │         ├── Policies                # Políticas de erros
+ │         └── Codes                   # Catálogo de códigos/mensagens
+ │
+ ├── Domain                           # Camada de domínio (regras de negócio puras)
+ │    ├── Entities                    # Entidades com identidade própria
+ │    ├── ValueObjects                # Objetos de valor (imutáveis, sem identidade)
+ │    ├── Services                    # Serviços de domínio (regras de negócio complexas)
+ │    ├── Events                      # Eventos de domínio
+ │    ├── Specifications              # Regras de negócio encapsuladas
+ │    ├── Exceptions                  # Exceções de domínio
+ │    └── Aggregates                  # Raízes de agregados e seus limites
+ │
+ ├── Infrastructure                   # Camada de infraestrutura (implementações técnicas)
+ │    ├── Repositories                # Implementação de repositórios (SQL/NoSQL/Procs)
+ │    ├── Messaging                   # Implementação de filas e mensageria
+ │    ├── Outbox                      # Processamento de mensagens persistidas (Outbox)
+ │    ├── Persistence                 # DbContext, conexões, unidade de trabalho
+ │    └── Migrations                  # Scripts/migrações de banco
+ │
+ └── Worker                           # Processos assíncronos / background
+      ├── Jobs                        # Tarefas agendadas (limpeza, auditoria, batch)
+      └── Consumers                   # Consumidores de mensagens (RabbitMQ/Kafka)
 
 
 
