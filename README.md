@@ -131,6 +131,39 @@
 
 ```mermaid
 erDiagram
+    Layer {
+        int LayerId PK
+        string Name
+    }
+
+    LayerItem {
+        int ItemId PK
+        string Name
+        int LayerId FK
+    }
+
+    Relationship {
+        int RelationshipId PK
+        int FromItemId FK
+        int ToItemId FK
+        int RelationshipTypeId FK
+        string Notes
+    }
+
+    RelationshipType {
+        int RelationshipTypeId PK
+        string Name
+    }
+
+    %% Relacionamentos
+    Layer ||--o{ LayerItem : "possui"
+    LayerItem ||--o{ Relationship : "origem (FromItemId)"
+    LayerItem ||--o{ Relationship : "destino (ToItemId)"
+    RelationshipType ||--o{ Relationship : "define tipo"
+```
+
+```mermaid
+erDiagram
     DOMAIN_ENTITIES ||--o{ APPLICATION_DTOs : "mapped_to"
     APPLICATION_USECASES ||--|| INFRASTRUCTURE_REPOSITORIES : "uses"
     INFRASTRUCTURE_REPOSITORIES }o--|| DOMAIN_ENTITIES : "persists"
