@@ -137,3 +137,45 @@ flowchart TB
   Requests --> Responses
 
 ```
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph Mappers["Application/Mappers"]
+    direction TB
+
+    subgraph Profiles["Profiles"]
+      P_desc["Configuração de mapeamentos (AutoMapper) Agrupadas por agregado/feature Ex.: UserProfile, ExpenseProfile"]
+    end
+
+    subgraph Converters["Converters / TypeConverters"]
+      C_desc["Conversões complexas DTO ⇄ Entity Ex.: string ⇄ enum, normalização de datas"]
+    end
+
+    subgraph Resolvers["ValueResolvers / MemberValueResolvers"]
+      R_desc["Regras para campos específicos Ex.: compor NomeCompleto, calcular Status"]
+    end
+
+    subgraph Transformers["ValueTransformers (opcional)"]
+      T_desc["Transformações globais de tipo Ex.: trim em strings, UTC ⇄ LocalTime"]
+    end
+
+    subgraph Extensions["Extensions (opcional)"]
+      E_desc["Métodos de extensão p/ facilitar uso Ex.: obj.ToDto(), obj.ToEntity()"]
+    end
+
+    subgraph Config["MappingConfig / Registration"]
+      MC_desc["Registro central do AutoMapper AddProfiles(), validação de configuração"]
+    end
+  end
+
+  %% Relações
+  Profiles --> Converters
+  Profiles --> Resolvers
+  Profiles --> Transformers
+  Extensions --> Profiles
+  Config --> Profiles
+
+```
+
