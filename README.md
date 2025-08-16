@@ -320,3 +320,38 @@ flowchart TB
   Common --> Features
   Pipeline --> Features
 ```
+
+# Handlers
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph Handlers["Application/Handlers"]
+    direction TB
+
+    subgraph Commands["CommandHandlers (Escrita)"]
+      C_desc["Manipulam Commands\nCreate/Update/Delete\nTransação + UoW\nChamam Domain/Repos"]
+      C_examples["Ex.: CreateUserCommandHandler\nUpdateExpenseCommandHandler\nDeleteCategoryCommandHandler"]
+    end
+
+    subgraph Queries["QueryHandlers (Leitura)"]
+      Q_desc["Manipulam Queries\nConsultas otimizadas\nProjeções para DTOs\nPaginação/Filtros"]
+      Q_examples["Ex.: GetUserByIdQueryHandler\nGetExpensesByCategoryQueryHandler\nListTransactionsPagedHandler"]
+    end
+
+    subgraph Notifications["NotificationHandlers (Eventos)"]
+      N_desc["Reagem a eventos (publish/subscribe)\nSide-effects: e-mail, auditoria, outbox\nIntegração assíncrona"]
+      N_examples["Ex.: UserCreatedNotificationHandler\nExpenseDeletedNotificationHandler"]
+    end
+
+    subgraph Pipeline["PipelineBehaviors (opcional)"]
+      PB_val["ValidationBehavior\nValida Requests antes do Handler"]
+      PB_log["LoggingBehavior\nMétricas/Tracing/CorrelationId"]
+      PB_retry["RetryBehavior\nPolly/Resiliência (somente leitura ou idempotente)"]
+      PB_perf["PerformanceBehavior\nTempo por handler"]
+    end
+
+    subgraph Mappings["Mappings (opcional)"]
+      MP_desc["Adaptadores entre Command/Query e DTOs\nNormalização/Enriquecimento de dados]()_
+
+```
