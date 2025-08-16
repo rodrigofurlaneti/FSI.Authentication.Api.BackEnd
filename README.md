@@ -193,23 +193,23 @@ flowchart TB
     direction TB
 
     subgraph Repositories["Repositories"]
-      R_desc["Contratos p/ acesso a dados\nInfra implementa\nEx.: IUserRepository, IExpenseRepository"]
+      R_desc["Contratos p/ acesso a dados Infra implementa Ex.: IUserRepository, IExpenseRepository"]
     end
 
     subgraph Services["Services"]
-      S_desc["Serviços de aplicação\nUsados pela API/Worker\nEx.: IEmailService, INotificationService"]
+      S_desc["Serviços de aplicação Usados pela API/Worker Ex.: IEmailService, INotificationService"]
     end
 
     subgraph Messaging["Messaging (opcional)"]
-      M_desc["Contratos p/ mensageria\nEx.: IMessageProducer, IMessageConsumer"]
+      M_desc["Contratos p/ mensageria Ex.: IMessageProducer, IMessageConsumer"]
     end
 
     subgraph External["External / Gateways (opcional)"]
-      E_desc["Contratos p/ integrações externas\nEx.: IPaymentGateway, IAuthProvider"]
+      E_desc["Contratos p/ integrações externas Ex.: IPaymentGateway, IAuthProvider"]
     end
 
     subgraph Common["Common (opcional)"]
-      C_desc["Interfaces utilitárias/genéricas\nEx.: IUnitOfWork, ILoggerAdapter"]
+      C_desc["Interfaces utilitárias/genéricas Ex.: IUnitOfWork, ILoggerAdapter"]
     end
   end
 
@@ -229,23 +229,23 @@ flowchart TB
     direction TB
 
     subgraph AppServices["AppServices (Core)"]
-      A_desc["Orquestram casos de uso\nChamam Domain e Infra\nEx.: UserAppService, ExpenseAppService"]
+      A_desc["Orquestram casos de uso Chamam Domain e Infra Ex.: UserAppService, ExpenseAppService"]
     end
 
     subgraph CommandHandlers["CommandHandlers (opcional)"]
-      CH_desc["Manipulam Commands (escrita)\nEx.: CreateUserCommandHandler, DeleteExpenseCommandHandler"]
+      CH_desc["Manipulam Commands (escrita) Ex.: CreateUserCommandHandler, DeleteExpenseCommandHandler"]
     end
 
     subgraph QueryHandlers["QueryHandlers (opcional)"]
-      QH_desc["Manipulam Queries (leitura)\nEx.: GetUserByIdQueryHandler, GetExpensesByCategoryQueryHandler"]
+      QH_desc["Manipulam Queries (leitura) Ex.: GetUserByIdQueryHandler, GetExpensesByCategoryQueryHandler"]
     end
 
     subgraph Orchestrators["Orchestrators / Coordinators (opcional)"]
-      O_desc["Coordenam fluxos complexos\nEx.: CheckoutOrchestrator, ExpenseSyncCoordinator"]
+      O_desc["Coordenam fluxos complexos Ex.: CheckoutOrchestrator, ExpenseSyncCoordinator"]
     end
 
     subgraph Decorators["Decorators / Pipeline (opcional)"]
-      D_desc["Cross-cutting concerns\nEx.: Logging, Retry, Metrics"]
+      D_desc["Cross-cutting concerns Ex.: Logging, Retry, Metrics"]
     end
   end
 
