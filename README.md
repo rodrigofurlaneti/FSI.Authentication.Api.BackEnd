@@ -219,3 +219,39 @@ flowchart TB
   Messaging --> External
   External --> Common
 ```
+
+# Services
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph Services["Application/Services"]
+    direction TB
+
+    subgraph AppServices["AppServices (Core)"]
+      A_desc["Orquestram casos de uso\nChamam Domain e Infra\nEx.: UserAppService, ExpenseAppService"]
+    end
+
+    subgraph CommandHandlers["CommandHandlers (opcional)"]
+      CH_desc["Manipulam Commands (escrita)\nEx.: CreateUserCommandHandler, DeleteExpenseCommandHandler"]
+    end
+
+    subgraph QueryHandlers["QueryHandlers (opcional)"]
+      QH_desc["Manipulam Queries (leitura)\nEx.: GetUserByIdQueryHandler, GetExpensesByCategoryQueryHandler"]
+    end
+
+    subgraph Orchestrators["Orchestrators / Coordinators (opcional)"]
+      O_desc["Coordenam fluxos complexos\nEx.: CheckoutOrchestrator, ExpenseSyncCoordinator"]
+    end
+
+    subgraph Decorators["Decorators / Pipeline (opcional)"]
+      D_desc["Cross-cutting concerns\nEx.: Logging, Retry, Metrics"]
+    end
+  end
+
+  %% Relações
+  AppServices --> CommandHandlers
+  AppServices --> QueryHandlers
+  AppServices --> Orchestrators
+  AppServices --> Decorators
+```
