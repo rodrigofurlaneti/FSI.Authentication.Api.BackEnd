@@ -330,29 +330,29 @@ flowchart TB
     direction TB
 
     subgraph Commands["CommandHandlers (Escrita)"]
-      C_desc["Manipulam Commands\nCreate/Update/Delete\nTransação + UoW\nChamam Domain/Repos"]
-      C_examples["Ex.: CreateUserCommandHandler\nUpdateExpenseCommandHandler\nDeleteCategoryCommandHandler"]
+      C_desc["Manipulam Commands Create/Update/Delete Transação + UoW Chamam Domain/Repos"]
+      C_examples["Ex.: CreateUserCommandHandler UpdateExpenseCommandHandler DeleteCategoryCommandHandler"]
     end
 
     subgraph Queries["QueryHandlers (Leitura)"]
-      Q_desc["Manipulam Queries\nConsultas otimizadas\nProjeções para DTOs\nPaginação/Filtros"]
-      Q_examples["Ex.: GetUserByIdQueryHandler\nGetExpensesByCategoryQueryHandler\nListTransactionsPagedHandler"]
+      Q_desc["Manipulam Queries Consultas otimizadas Projeções para DTOs Paginação/Filtros"]
+      Q_examples["Ex.: GetUserByIdQueryHandler GetExpensesByCategoryQueryHandler ListTransactionsPagedHandler"]
     end
 
     subgraph Notifications["NotificationHandlers (Eventos)"]
-      N_desc["Reagem a eventos (publish/subscribe)\nSide-effects: e-mail, auditoria, outbox\nIntegração assíncrona"]
-      N_examples["Ex.: UserCreatedNotificationHandler\nExpenseDeletedNotificationHandler"]
+      N_desc["Reagem a eventos (publish/subscribe) Side-effects: e-mail, auditoria, outbox Integração assíncrona"]
+      N_examples["Ex.: UserCreatedNotificationHandler ExpenseDeletedNotificationHandler"]
     end
 
     subgraph Pipeline["PipelineBehaviors (opcional)"]
-      PB_val["ValidationBehavior\nValida Requests antes do Handler"]
-      PB_log["LoggingBehavior\nMétricas/Tracing/CorrelationId"]
-      PB_retry["RetryBehavior\nPolly/Resiliência (somente leitura ou idempotente)"]
-      PB_perf["PerformanceBehavior\nTempo por handler"]
+      PB_val["ValidationBehavior Valida Requests antes do Handler"]
+      PB_log["LoggingBehavior Métricas/Tracing/CorrelationId"]
+      PB_retry["RetryBehavior Polly/Resiliência (somente leitura ou idempotente)"]
+      PB_perf["PerformanceBehavior Tempo por handler"]
     end
 
     subgraph Mappings["Mappings (opcional)"]
-      MP_desc["Adaptadores entre Command/Query e DTOs\nNormalização/Enriquecimento de dados]()_
+      MP_desc["Adaptadores entre Command/Query e DTOs Normalização/Enriquecimento de dados]()_
 
 ```
 
@@ -365,27 +365,27 @@ flowchart TB
     direction TB
 
     subgraph Events["Events (Application/Domain→App)"]
-      E_desc["Contratos de eventos/notificações\nEx.: UserCreated, ExpenseDeleted"]
+      E_desc["Contratos de eventos/notificações Ex.: UserCreated, ExpenseDeleted"]
     end
 
     subgraph Publishers["Publishers"]
-      P_desc["Publicam notificações (in-proc via MediatR ou outbox → broker)\nEx.: NotificationPublisher"]
+      P_desc["Publicam notificações (in-proc via MediatR ou outbox → broker) Ex.: NotificationPublisher"]
     end
 
     subgraph Handlers["Handlers"]
-      H_desc["Reagem aos eventos (side-effects)\nEx.: enviar e-mail, auditoria, projeções de leitura"]
+      H_desc["Reagem aos eventos (side-effects) Ex.: enviar e-mail, auditoria, projeções de leitura"]
     end
 
     subgraph Adapters["Adapters / Translators (opcional)"]
-      A_desc["Mapeiam DomainEvent → AppNotification\nNormalizam payloads para fila/API externa"]
+      A_desc["Mapeiam DomainEvent → AppNotification Normalizam payloads para fila/API externa"]
     end
 
     subgraph Outbox["Outbox (opcional)"]
-      O_desc["Tabela de saída transacional\nProcessador de outbox para broker (Rabbit/Kafka)"]
+      O_desc["Tabela de saída transacional Processador de outbox para broker (Rabbit/Kafka)"]
     end
 
     subgraph Policies["Policies (opcional)"]
-      PL_desc["Retry/Backoff/Dead-letter\nIdempotência e deduplicação"]
+      PL_desc["Retry/Backoff/Dead-letter Idempotência e deduplicação"]
     end
   end
 
