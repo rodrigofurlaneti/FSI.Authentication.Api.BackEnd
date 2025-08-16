@@ -1,11 +1,10 @@
-```mermaid
+# FSI.Authentication — Application Layer
 
+## 1) Arquitetura (visão geral)
+```mermaid
 %%{init: {"flowchart": {"htmlLabels": false}} }%%
 flowchart TB
 
-  %% ==========================
-  %% ARQUITETURA GERAL
-  %% ==========================
   subgraph Clients["Clients"]
     Web["Web App"]
     Mobile["Mobile App"]
@@ -49,11 +48,8 @@ flowchart TB
   Worker --> DB
   Worker --> Broker
 
-
-  %% ==========================
-  %% CAMADA APPLICATION — Árvore completa
-  %% ==========================
-  flowchart TB
+  %%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
 
   A["/Application"] --> B["/Contracts"]
   B --> B1["/Requests"]
@@ -62,11 +58,13 @@ flowchart TB
   B1 --> BR3["RevokeTokenRequest.cs"]
   B1 --> BR4["CreateUserRequest.cs"]
   B1 --> BR5["GetUserByIdRequest.cs"]
+
   B --> B2["/Responses"]
   B2 --> BS1["LoginResponse.cs"]
   B2 --> BS2["RefreshTokenResponse.cs"]
   B2 --> BS3["RevokeTokenResponse.cs"]
   B2 --> BS4["UserResponse.cs"]
+
   B --> B3["IAuthAppService.cs"]
   B --> B4["IUserAppService.cs"]
 
@@ -106,32 +104,27 @@ flowchart TB
   H --> H1["ApplicationException.cs"]
   H --> H2["ValidationException.cs"]
 
-
-  %% ==========================
-  %% CAMADA APPLICATION — Função de cada pasta (descrições)
-  %% ==========================
-  flowchart LR
-
-  Contracts["/Contracts"] -->|Entrada/Saída| DescContracts["DTOs de Request/Response\n+ Interfaces de Serviços de Aplicação\nExpõem a API da camada para a Presentation.\nSem regras de negócio."]
-  UseCases["/UseCases"] -->|Orquestra| DescUseCases["Casos de uso (Application Services)\nCoordenam fluxo: validar → chamar Domain/Infra → montar Response.\nSem lógica de domínio."]
-  Validators["/Validators"] -->|Garante| DescValidators["Validação de entrada (ex.: FluentValidation)\nRegras sintáticas e de formato antes do caso de uso."]
-  Mapping["/Mapping"] -->|Converte| DescMapping["Mapeamentos entre Domain ↔ DTOs\nAutoMapper ou mapeamento manual.\nMantém conversões centralizadas."]
-  Common["/Common"] -->|Utilidades| DescCommon["Tipos utilitários: Result<T>, Errors, PagedResult,\nOperationStatus, helpers comuns da camada."]
-  Behaviors["/Behaviors (opcional)"] -->|Pipeline| DescBehaviors["Cross-cutting em pipeline (ex.: MediatR):\nLogging, Validation, Performance, Retry.\nNão contém regra de domínio."]
-  Exceptions["/Exceptions (opcional)"] -->|Erros| DescExceptions["Exceções específicas da camada Application\npara padronizar falhas controladas."]
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart LR
 
   subgraph Application["Application Layer (DDD/CQRS)"]
-    Contracts
-    UseCases
-    Validators
-    Mapping
-    Common
-    Behaviors
-    Exceptions
+    Contracts["/Contracts"]
+    UseCases["/UseCases"]
+    Validators["/Validators"]
+    Mapping["/Mapping"]
+    Common["/Common"]
+    Behaviors["/Behaviors (opcional)"]
+    Exceptions["/Exceptions (opcional)"]
   end
+
+  Contracts -->|Entrada/Saída| DescContracts["DTOs de Request/Response\n+ Interfaces de Serviços de Aplicação\nExposição para a camada Presentation.\nSem regra de negócio."]
+  UseCases -->|Orquestra| DescUseCases["Casos de uso (Application Services)\nValida → chama Domain/Infra → monta Response.\nSem lógica de domínio."]
+  Validators -->|Garante| DescValidators["Validação de entrada (ex.: FluentValidation)\nFormato/consistência antes do uso."]
+  Mapping -->|Converte| DescMapping["Mapeamentos Domain ↔ DTOs\nAutoMapper ou manual, centralizados."]
+  Common -->|Utilidades| DescCommon["Tipos utilitários: Result<T>, Errors,\nPagedResult, OperationStatus, helpers."]
+  Behaviors -->|Pipeline| DescBehaviors["Cross-cutting (ex.: MediatR):\nLogging, Validation, Performance, Retry."]
+  Exceptions -->|Erros| DescExceptions["Exceções da camada Application\npara falhas controladas/padronizadas."]
 
 
 ```
-  
----
 
