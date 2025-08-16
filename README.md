@@ -98,3 +98,42 @@ flowchart TB
 ## Notifications → Canal para erros, warnings ou eventos que precisam ser propagados.
 
 ## Exceptions → Exceções de aplicação, isolando regras de erro que não pertencem ao Domain.
+
+# Dtos
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph DTOs["Application/DTOs"]
+    direction TB
+
+    subgraph Requests["Requests"]
+      R_desc["Entrada da API\nValidação antes do Domain\nSomente dados (sem regra)"]
+      R_examples["Exemplos:\nCreateUserRequest\nUpdateExpenseRequest\nSearchExpenseRequest"]
+    end
+
+    subgraph Responses["Responses"]
+      S_desc["Saída da API\nModelos de retorno/paginação\nSem lógica de negócio"]
+      S_examples["Exemplos:\nUserResponse\nExpenseSummaryResponse\nPagedResultResponse"]
+    end
+
+    subgraph Shared["Shared / Common (opcional)"]
+      Sh_desc["Tipos reutilizáveis\nEndereço, Documento, Paginação, Filtros"]
+      Sh_examples["Exemplos:\nAddressDto\nDocumentDto\nPaginationDto\nFilterDto"]
+    end
+
+    subgraph Profiles["Profiles / MappingConfig (opcional)"]
+      P_desc["Configurações de mapping (AutoMapper)\nPerfil por agregado / feature"]
+      P_examples["Exemplos:\nUserProfile\nExpenseProfile"]
+    end
+  end
+
+  %% Relações de uso
+  Shared --> Requests
+  Shared --> Responses
+  Profiles --> Requests
+  Profiles --> Responses
+  Requests --> Responses
+
+```
