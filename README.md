@@ -714,3 +714,36 @@ flowchart TB
   Controllers --> DTOs
   Controllers --> Filters
   ```
+
+# Models
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph Models["Presentation/Models"]
+    direction TB
+
+    subgraph Requests["Requests"]
+      R_auth["Auth LoginModel RefreshTokenModel"]
+      R_users["Users CreateUserModel UpdateUserModel"]
+      R_exp["Expenses CreateExpenseModel ImportExpensesCsvModel"]
+      R_common["Common PaginationModel DateRangeModel"]
+    end
+
+    subgraph Responses["Responses"]
+      S_users["Users UserViewModel"]
+      S_exp["Expenses ExpenseViewModel ExpenseSummaryViewModel"]
+      S_common["Common PagedResultModel"]
+    end
+
+    subgraph Bindings["Bindings (opcional)"]
+      B_custom["CustomModelBinders Enums, datas, CSV"]
+      B_multipart["MultipartFormBinders Upload de arquivos"]
+    end
+  end
+
+  %% Relações
+  Requests --> Responses
+  Bindings --> Requests
+  ```
