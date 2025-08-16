@@ -453,3 +453,49 @@ flowchart TB
   Codes --> Mapping
 
   ```
+
+  # Presentation Layer
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TB
+
+  subgraph Presentation["Presentation Layer (API)"]
+    direction TB
+
+    subgraph Controllers["Controllers"]
+      C_desc["Expondo endpoints REST/GraphQL/gRPC\nChamam Application Services ou Handlers\nEx.: UserController, ExpenseController"]
+    end
+
+    subgraph Filters["Filters"]
+      F_desc["Filtros de ação e exceção\nEx.: ApiExceptionFilter, ValidationFilter"]
+    end
+
+    subgraph Middleware["Middleware"]
+      M_desc["Pipeline HTTP (Request → Response)\nEx.: ExceptionHandlingMiddleware, CorrelationIdMiddleware"]
+    end
+
+    subgraph Auth["Auth / Security"]
+      A_desc["Autenticação e Autorização\nEx.: JWT Bearer, OAuth2, AuthorizationPolicies"]
+    end
+
+    subgraph ProblemDetails["ProblemDetails / Error Handling"]
+      PD_desc["Padrão RFC 7807\nMapeamento de exceções p/ HTTP\nEx.: ProblemDetailsFactory, ValidationProblemDetails"]
+    end
+
+    subgraph Models["Models (opcional)"]
+      Mo_desc["Modelos de entrada p/ endpoints\nSe não usar DTO diretamente\nEx.: LoginModel, RegisterModel"]
+    end
+
+    subgraph Config["Config"]
+      Co_desc["Configurações auxiliares da API\nEx.: SwaggerConfig, ApiVersioningConfig"]
+    end
+  end
+
+  %% Relações
+  Controllers --> Filters
+  Controllers --> Middleware
+  Controllers --> Auth
+  Controllers --> ProblemDetails
+  Controllers --> Models
+  Controllers --> Config
+```
