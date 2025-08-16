@@ -1,3 +1,290 @@
+📦 src
+ ├── Clients
+ │    ├── Web
+ │    ├── Mobile
+ │    └── Partner
+ │
+ ├── Presentation
+ │    ├── Controllers
+ │    │    ├── Users
+ │    │    ├── Expenses
+ │    │    ├── Categories
+ │    │    ├── Transactions
+ │    │    ├── Auth
+ │    │    ├── Admin
+ │    │    └── Base
+ │    │
+ │    ├── Filters
+ │    │    ├── ExceptionFilters
+ │    │    ├── ValidationFilters
+ │    │    ├── ActionFilters
+ │    │    ├── AuthorizationFilters
+ │    │    └── ResultFilters
+ │    │
+ │    ├── Middleware
+ │    ├── Auth
+ │    │    ├── Jwt
+ │    │    ├── Policies
+ │    │    ├── Claims
+ │    │    ├── Identity
+ │    │    ├── Providers
+ │    │    └── Utils
+ │    │
+ │    ├── ProblemDetails
+ │    │    ├── Factory
+ │    │    ├── Mapping
+ │    │    ├── Models
+ │    │    ├── Writers
+ │    │    └── Extensions
+ │    │
+ │    ├── Admin
+ │    │    ├── Controllers
+ │    │    ├── Services
+ │    │    ├── Auth
+ │    │    ├── DTOs
+ │    │    └── Filters
+ │    │
+ │    ├── Models
+ │    │    ├── Requests
+ │    │    ├── Responses
+ │    │    └── Bindings
+ │    │
+ │    └── Config
+ │         ├── Swagger
+ │         ├── Versioning
+ │         ├── Cors
+ │         ├── Json
+ │         ├── RateLimiting
+ │         └── HealthChecks
+ │
+ ├── Application
+ │    ├── DTOs
+ │    │    ├── Requests
+ │    │    ├── Responses
+ │    │    ├── Shared
+ │    │    └── Profiles
+ │    │
+ │    ├── Mappers
+ │    │    ├── Profiles
+ │    │    ├── Converters
+ │    │    ├── Resolvers
+ │    │    ├── Transformers
+ │    │    ├── Extensions
+ │    │    └── Config
+ │    │
+ │    ├── Interfaces
+ │    │    ├── Repositories
+ │    │    ├── Services
+ │    │    ├── Messaging
+ │    │    ├── External
+ │    │    └── Common
+ │    │
+ │    ├── Services
+ │    │    ├── AppServices
+ │    │    ├── CommandHandlers
+ │    │    ├── QueryHandlers
+ │    │    ├── Orchestrators
+ │    │    └── Decorators
+ │    │
+ │    ├── UseCases
+ │    │    ├── Commands
+ │    │    ├── Queries
+ │    │    ├── Events
+ │    │    └── Pipelines
+ │    │
+ │    ├── Validators
+ │    │    ├── Features
+ │    │    ├── Common
+ │    │    └── Pipeline
+ │    │
+ │    ├── Handlers
+ │    │    ├── Commands
+ │    │    ├── Queries
+ │    │    ├── Notifications
+ │    │    ├── Pipeline
+ │    │    └── Mappings
+ │    │
+ │    ├── Notifications
+ │    │    ├── Events
+ │    │    ├── Publishers
+ │    │    ├── Handlers
+ │    │    ├── Adapters
+ │    │    ├── Outbox
+ │    │    └── Policies
+ │    │
+ │    └── Exceptions
+ │         ├── Types
+ │         ├── Mapping
+ │         ├── Translators
+ │         ├── Middleware
+ │         ├── Policies
+ │         └── Codes
+ │
+ ├── Domain
+ │    ├── Entities
+ │    ├── ValueObjects
+ │    ├── Services
+ │    ├── Events
+ │    ├── Specifications
+ │    ├── Exceptions
+ │    └── Aggregates
+ │
+ ├── Infrastructure
+ │    ├── Repositories
+ │    ├── Messaging
+ │    ├── Outbox
+ │    ├── Persistence
+ │    └── Migrations
+ │
+ └── Worker
+      ├── Jobs
+      └── Consumers
+
+
+📦 src
+ ├── Clients                          # Camada de clientes que consomem a API
+ │    ├── Web                         # Aplicação Web
+ │    ├── Mobile                      # Aplicativo Mobile
+ │    └── Partner                     # Integrações com sistemas/parceiros externos
+ │
+ ├── Presentation                     # Camada de apresentação (API / Controllers)
+ │    ├── Controllers                 # Endpoints HTTP expostos aos clientes
+ │    │    ├── Users                  # Controladores de usuários
+ │    │    ├── Expenses               # Controladores de despesas (sync/async)
+ │    │    ├── Categories             # Controladores de categorias
+ │    │    ├── Transactions           # Controladores de transações financeiras
+ │    │    ├── Auth                   # Autenticação/autorização (login, tokens)
+ │    │    ├── Admin                  # Endpoints administrativos (monitoramento, jobs)
+ │    │    └── Base                   # Controller base com helpers padrão
+ │    │
+ │    ├── Filters                     # Filtros globais de requisição/resposta
+ │    │    ├── ExceptionFilters        # Converte exceções em ProblemDetails
+ │    │    ├── ValidationFilters       # Validação de inputs/DTOs
+ │    │    ├── ActionFilters           # Logging e auditoria de ações
+ │    │    ├── AuthorizationFilters    # Regras de autorização customizadas
+ │    │    └── ResultFilters           # Padroniza formato das respostas
+ │    │
+ │    ├── Middleware                  # Pipeline HTTP (logging, exceptions, tracing)
+ │    │
+ │    ├── Auth                        # Configuração de autenticação/autorização
+ │    │    ├── Jwt                     # Configuração JWT (tokens)
+ │    │    ├── Policies                # Regras de acesso (roles, claims)
+ │    │    ├── Claims                  # Extensões e tipos de claims
+ │    │    ├── Identity                # Integração com ASP.NET Identity
+ │    │    ├── Providers               # Login externo (Google, MS, Facebook)
+ │    │    └── Utils                   # Utilidades de segurança (hash, validação)
+ │    │
+ │    ├── ProblemDetails              # Padronização de erros (RFC 7807)
+ │    │    ├── Factory                 # Criação de objetos ProblemDetails
+ │    │    ├── Mapping                 # Mapeia exceptions → problem types
+ │    │    ├── Models                  # Estruturas extendidas de erros
+ │    │    ├── Writers                 # Escrita serializada (JSON)
+ │    │    └── Extensions              # Helpers e extensões de contexto
+ │    │
+ │    ├── Admin                       # APIs administrativas/operacionais
+ │    │    ├── Controllers             # HealthCheck, Monitoramento, Jobs
+ │    │    ├── Services                # Serviços de diagnóstico e info de build
+ │    │    ├── Auth                    # Regras extras de autenticação admin
+ │    │    ├── DTOs                    # Modelos de resposta de health/build
+ │    │    └── Filters                 # Auditoria de ações administrativas
+ │    │
+ │    ├── Models                      # Modelos de binding (entrada/saída da API)
+ │    │    ├── Requests                # Modelos de entrada (POST/PUT)
+ │    │    ├── Responses               # Modelos de saída (GET/DTOs de retorno)
+ │    │    └── Bindings                # Model binders customizados (arquivos, CSV)
+ │    │
+ │    └── Config                      # Configurações auxiliares
+ │         ├── Swagger                 # Documentação OpenAPI
+ │         ├── Versioning              # Versionamento da API
+ │         ├── Cors                    # Políticas CORS
+ │         ├── Json                    # Serialização JSON
+ │         ├── RateLimiting            # Limite de requisições
+ │         └── HealthChecks            # Configuração de health checks
+ │
+ ├── Application                      # Camada de aplicação (regras de orquestração)
+ │    ├── DTOs                        # Objetos de transporte (entrada/saída)
+ │    │    ├── Requests                # DTOs de entrada
+ │    │    ├── Responses               # DTOs de saída
+ │    │    ├── Shared                  # DTOs comuns/reutilizáveis
+ │    │    └── Profiles                # Perfis de mapeamento (AutoMapper)
+ │    │
+ │    ├── Mappers                     # Conversão entre DTOs e Entities
+ │    │    ├── Profiles                # Configurações de mapping
+ │    │    ├── Converters              # Conversões complexas
+ │    │    ├── Resolvers               # Resolvedores de propriedades
+ │    │    ├── Transformers            # Transformações globais
+ │    │    ├── Extensions              # Métodos de extensão de mapping
+ │    │    └── Config                  # Registro de perfis
+ │    │
+ │    ├── Interfaces                  # Contratos da camada Application
+ │    │    ├── Repositories            # Interfaces de persistência
+ │    │    ├── Services                # Interfaces de serviços de aplicação
+ │    │    ├── Messaging               # Interfaces de mensageria
+ │    │    ├── External                # Integrações externas (gateways)
+ │    │    └── Common                  # Interfaces utilitárias
+ │    │
+ │    ├── Services                    # Serviços de aplicação
+ │    │    ├── AppServices             # Orquestram casos de uso
+ │    │    ├── CommandHandlers         # Manipulam Commands (escrita)
+ │    │    ├── QueryHandlers           # Manipulam Queries (leitura)
+ │    │    ├── Orchestrators           # Coordenam fluxos complexos
+ │    │    └── Decorators              # Cross-cutting concerns (logging, retry)
+ │    │
+ │    ├── UseCases                    # Casos de uso específicos
+ │    │    ├── Commands                # Ações de escrita (criar/atualizar/excluir)
+ │    │    ├── Queries                 # Consultas/leitura
+ │    │    ├── Events                  # Casos disparados por eventos
+ │    │    └── Pipelines               # Fluxos que agrupam múltiplos casos
+ │    │
+ │    ├── Validators                  # Validação de DTOs e requests
+ │    │    ├── Features                # Validadores por módulo/feature
+ │    │    ├── Common                  # Regras compartilhadas
+ │    │    └── Pipeline                # Behaviors de validação em CQRS
+ │    │
+ │    ├── Handlers                    # Manipuladores CQRS
+ │    │    ├── Commands                # Manipuladores de escrita
+ │    │    ├── Queries                 # Manipuladores de leitura
+ │    │    ├── Notifications           # Manipuladores de eventos
+ │    │    ├── Pipeline                # Pipeline behaviors (validação, log, retry)
+ │    │    └── Mappings                # Adaptação Command/Query ⇄ DTO
+ │    │
+ │    ├── Notifications               # Eventos/notificações de aplicação
+ │    │    ├── Events                  # Definição dos eventos
+ │    │    ├── Publishers              # Publicadores de eventos
+ │    │    ├── Handlers                # Manipuladores dos eventos
+ │    │    ├── Adapters                # Adaptação de eventos de domínio
+ │    │    ├── Outbox                  # Implementação do Outbox pattern
+ │    │    └── Policies                # Políticas de retry, idempotência
+ │    │
+ │    └── Exceptions                  # Exceções de aplicação
+ │         ├── Types                   # Tipos de exceções
+ │         ├── Mapping                 # Mapeamento para ProblemDetails
+ │         ├── Translators             # Tradução Domain/Infra → Application
+ │         ├── Middleware              # Tratamento centralizado
+ │         ├── Policies                # Políticas de erros
+ │         └── Codes                   # Catálogo de códigos/mensagens
+ │
+ ├── Domain                           # Camada de domínio (regras de negócio puras)
+ │    ├── Entities                    # Entidades com identidade própria
+ │    ├── ValueObjects                # Objetos de valor (imutáveis, sem identidade)
+ │    ├── Services                    # Serviços de domínio (regras de negócio complexas)
+ │    ├── Events                      # Eventos de domínio
+ │    ├── Specifications              # Regras de negócio encapsuladas
+ │    ├── Exceptions                  # Exceções de domínio
+ │    └── Aggregates                  # Raízes de agregados e seus limites
+ │
+ ├── Infrastructure                   # Camada de infraestrutura (implementações técnicas)
+ │    ├── Repositories                # Implementação de repositórios (SQL/NoSQL/Procs)
+ │    ├── Messaging                   # Implementação de filas e mensageria
+ │    ├── Outbox                      # Processamento de mensagens persistidas (Outbox)
+ │    ├── Persistence                 # DbContext, conexões, unidade de trabalho
+ │    └── Migrations                  # Scripts/migrações de banco
+ │
+ └── Worker                           # Processos assíncronos / background
+      ├── Jobs                        # Tarefas agendadas (limpeza, auditoria, batch)
+      └── Consumers                   # Consumidores de mensagens (RabbitMQ/Kafka)
+
+
 ```mermaid
 
 %%{init: {"flowchart": {"htmlLabels": false}} }%%
@@ -862,21 +1149,21 @@ flowchart TB
     direction TB
 
     subgraph Controllers["Controllers"]
-      C_Users["Users\nUserController"]
-      C_Expenses["Expenses\nExpenseControllerSync\nExpenseControllerAsync"]
-      C_Categories["Categories\nCategoryController"]
-      C_Transactions["Transactions\nTransactionController"]
-      C_Auth["Auth\nAuthController\nAccountController"]
-      C_Admin["Admin\nSystemController\nMonitoringController\nDiagnosticsController\nJobsController"]
-      C_Base["Base (opcional)\nApiControllerBase"]
+      C_Users["Users UserController"]
+      C_Expenses["Expenses ExpenseControllerSync ExpenseControllerAsync"]
+      C_Categories["Categories CategoryController"]
+      C_Transactions["Transactions TransactionController"]
+      C_Auth["Auth AuthController AccountController"]
+      C_Admin["Admin SystemController MonitoringController DiagnosticsController JobsController"]
+      C_Base["Base (opcional) ApiControllerBase"]
     end
 
     subgraph Filters["Filters"]
-      F_Exception["ExceptionFilters\nApiExceptionFilter\nDomainExceptionFilter"]
-      F_Validation["ValidationFilters\nValidationFilter"]
-      F_Action["ActionFilters\nLoggingActionFilter\nAuditActionFilter"]
-      F_Author["AuthorizationFilters\nRoleAuthorizationFilter"]
-      F_Result["ResultFilters\nResponseWrapperFilter"]
+      F_Exception["ExceptionFilters ApiExceptionFilter DomainExceptionFilter"]
+      F_Validation["ValidationFilters ValidationFilter"]
+      F_Action["ActionFilters LoggingActionFilter AuditActionFilter"]
+      F_Author["AuthorizationFilters RoleAuthorizationFilter"]
+      F_Result["ResultFilters ResponseWrapperFilter"]
     end
 
     subgraph Middleware["Middleware"]
@@ -891,42 +1178,42 @@ flowchart TB
     end
 
     subgraph Auth["Auth / Security"]
-      A_Jwt["JWT\nJwtAuthenticationConfig\nJwtTokenService\nJwtBearerEventsHandler"]
-      A_Policies["Policies\nAuthorizationPolicies\nPolicyNames"]
-      A_Claims["Claims\nClaimsExtensions\nClaimTypesCustom"]
-      A_Identity["Identity (opcional)\nIdentityConfig\nApplicationUser"]
-      A_Providers["External Providers (opcional)\nOAuth2ProviderConfig\nExternalLoginService"]
-      A_Utils["Utils\nPasswordHasher\nTokenValidationParametersFactory"]
+      A_Jwt["JWT JwtAuthenticationConfig JwtTokenService JwtBearerEventsHandler"]
+      A_Policies["Policies AuthorizationPolicies PolicyNames"]
+      A_Claims["Claims ClaimsExtensions ClaimTypesCustom"]
+      A_Identity["Identity (opcional) IdentityConfig ApplicationUser"]
+      A_Providers["External Providers (opcional) OAuth2ProviderConfig ExternalLoginService"]
+      A_Utils["Utils PasswordHasher TokenValidationParametersFactory"]
     end
 
     subgraph ProblemDetails["ProblemDetails (RFC 7807)"]
-      PD_Factory["Factory\nProblemDetailsFactory\nProblemDetailsOptions"]
-      PD_Mapping["Mapping\nExceptionToProblemDetailsMapper\nErrorCodeToProblemTypeMapper"]
-      PD_Models["Models\nExtendedProblemDetails\nValidationProblemDetailsEx"]
-      PD_Writers["Writers\nProblemDetailsWriter"]
-      PD_Ext["Extensions\nHttpContextProblemExtensions\nProblemDetailsExtensions"]
+      PD_Factory["Factory ProblemDetailsFactory ProblemDetailsOptions"]
+      PD_Mapping["Mapping ExceptionToProblemDetailsMapper ErrorCodeToProblemTypeMapper"]
+      PD_Models["Models ExtendedProblemDetails ValidationProblemDetailsEx"]
+      PD_Writers["Writers ProblemDetailsWriter"]
+      PD_Ext["Extensions HttpContextProblemExtensions ProblemDetailsExtensions"]
     end
 
     subgraph Admin["Admin"]
-      ADT_DTOs["DTOs\nHealthReportDto\nBuildInfoDto\nJobTriggerRequest"]
-      ADT_Services["Services\nHealthCheckService\nDiagnosticsService\nBuildInfoProvider"]
-      ADT_Auth["Auth\nAdminAuthorizationPolicy\nApiKeyValidator"]
-      ADT_Filters["Filters\nAdminAuditActionFilter"]
+      ADT_DTOs["DTOs HealthReportDto BuildInfoDto JobTriggerRequest"]
+      ADT_Services["Services HealthCheckService DiagnosticsService BuildInfoProvider"]
+      ADT_Auth["Auth AdminAuthorizationPolicy ApiKeyValidator"]
+      ADT_Filters["Filters AdminAuditActionFilter"]
     end
 
     subgraph Models["Models (opcional)"]
-      M_Req["Requests\nAuth: LoginModel, RefreshTokenModel\nUsers: Create/UpdateUserModel\nExpenses: CreateExpenseModel, ImportExpensesCsvModel\nCommon: PaginationModel, DateRangeModel"]
-      M_Res["Responses\nUsers: UserViewModel\nExpenses: ExpenseViewModel, ExpenseSummaryViewModel\nCommon: PagedResultModel"]
-      M_Bind["Bindings\nCustomModelBinders\nMultipartFormBinders"]
+      M_Req["Requests Auth: LoginModel, RefreshTokenModel Users: Create/UpdateUserModel Expenses: CreateExpenseModel, ImportExpensesCsvModel Common: PaginationModel, DateRangeModel"]
+      M_Res["Responses Users: UserViewModel Expenses: ExpenseViewModel, ExpenseSummaryViewModel Common: PagedResultModel"]
+      M_Bind["Bindings CustomModelBinders MultipartFormBinders"]
     end
 
     subgraph Config["Config"]
-      CFG_Swagger["Swagger\nSwaggerConfig\nSwaggerAuthConfig"]
-      CFG_Version["Versioning\nApiVersioningConfig\nApiExplorerConfig"]
-      CFG_Cors["CORS\nCorsConfig"]
-      CFG_Json["JSON\nJsonOptionsConfig\nProblemDetailsConfig"]
-      CFG_Rate["RateLimiting (opcional)\nRateLimitingConfig"]
-      CFG_Health["HealthChecks (opcional)\nHealthChecksConfig"]
+      CFG_Swagger["Swagger SwaggerConfig SwaggerAuthConfig"]
+      CFG_Version["Versioning ApiVersioningConfig ApiExplorerConfig"]
+      CFG_Cors["CORS CorsConfig"]
+      CFG_Json["JSON JsonOptionsConfig ProblemDetailsConfig"]
+      CFG_Rate["RateLimiting (opcional) RateLimitingConfig"]
+      CFG_Health["HealthChecks (opcional) HealthChecksConfig"]
     end
   end
 
@@ -955,7 +1242,7 @@ flowchart TB
       I_Services["Services"]
       I_Msg["Messaging (opcional)"]
       I_Ext["External / Gateways (opcional)"]
-      I_Common["Common (opcional)\nIUnitOfWork\nILoggerAdapter"]
+      I_Common["Common (opcional) IUnitOfWork ILoggerAdapter"]
     end
 
     subgraph Services["Services"]
@@ -974,16 +1261,16 @@ flowchart TB
     end
 
     subgraph Validators["Validators"]
-      V_Features["Features (por módulo)\nUsers/Expenses/Categories ..."]
-      V_Common["Common / Shared\nRules\nExtensions\nMessages\nHelpers"]
-      V_Beh["Pipeline (opcional)\nValidationBehavior\nValidationFailureAdapter"]
+      V_Features["Features (por módulo) Users/Expenses/Categories ..."]
+      V_Common["Common / Shared Rules Extensions Messages Helpers"]
+      V_Beh["Pipeline (opcional) ValidationBehavior ValidationFailureAdapter"]
     end
 
     subgraph Handlers["Handlers (CQRS)"]
       H_Cmd["CommandHandlers (Escrita)"]
       H_Qry["QueryHandlers (Leitura)"]
       H_Notif["NotificationHandlers (Eventos)"]
-      H_Pipe["PipelineBehaviors (opcional)\nValidation/Logging/Retry/Performance"]
+      H_Pipe["PipelineBehaviors (opcional) Validation/Logging/Retry/Performance"]
       H_Map["Mappings (opcional)"]
     end
 
@@ -997,9 +1284,9 @@ flowchart TB
     end
 
     subgraph Exceptions["Exceptions"]
-      E_Types["Types\nApplicationException base\nValidation/NotFound/Conflict/Unauthorized/Forbidden/BusinessRule"]
+      E_Types["Types ApplicationException base Validation/NotFound/Conflict/Unauthorized/Forbidden/BusinessRule"]
       E_Map["Mapping / ProblemDetails"]
-      E_Tr["Translators\nDomain/Infra → Application"]
+      E_Tr["Translators Domain/Infra → Application"]
       E_MW["Middleware / Filters"]
       E_Pol["Policies (opcional)"]
       E_Codes["ErrorCodes / Messages"]
@@ -1009,35 +1296,35 @@ flowchart TB
   %% ==== Domain Layer ====
   subgraph Domain["Domain Layer"]
     direction TB
-    D_Entities["Entities\nUser\nExpense\nTransaction\nCategory"]
-    D_VO["ValueObjects\nMoney\nEmail\nDocument (CPF/CNPJ)\nDateRange"]
-    D_Services["Domain Services\nExpenseDomainService\nTransactionDomainService"]
-    D_Events["Domain Events\nUserCreatedDomainEvent\nExpenseDeletedDomainEvent"]
-    D_Specs["Specifications (opcional)\nExpenseOverLimitSpec\nActiveUserSpec"]
-    D_Ex["Exceptions\nDomainException\nInvalidMoneyException"]
-    D_Agg["Aggregates\nExpenseAggregate\nTransactionAggregate"]
+    D_Entities["Entities User Expense Transaction Category"]
+    D_VO["ValueObjects Money Email Document (CPF/CNPJ) DateRange"]
+    D_Services["Domain Services ExpenseDomainService TransactionDomainService"]
+    D_Events["Domain Events UserCreatedDomainEvent ExpenseDeletedDomainEvent"]
+    D_Specs["Specifications (opcional) ExpenseOverLimitSpec ActiveUserSpec"]
+    D_Ex["Exceptions DomainException InvalidMoneyException"]
+    D_Agg["Aggregates ExpenseAggregate TransactionAggregate"]
   end
 
   %% ==== Infrastructure Layer ====
   subgraph Infrastructure["Infrastructure Layer"]
     direction TB
-    INF_Repos["Repositories (Procs/Dapper/EF)\nImplementações de I*Repository\nSQL/Stored Procedures"]
-    INF_Msg["Messaging\nProducer/Consumer\nConfig de filas"]
+    INF_Repos["Repositories (Procs/Dapper/EF) Implementações de I*Repository SQL/Stored Procedures"]
+    INF_Msg["Messaging Producer/Consumer Config de filas"]
     INF_Outbox["Outbox Processor"]
-    INF_Persist["Persistence\nDbContext/Connections"]
+    INF_Persist["Persistence DbContext/Connections"]
     INF_Migr["Migrations / Scripts"]
   end
 
   %% ==== Worker Layer ====
   subgraph Worker["Worker Layer"]
     direction TB
-    W_Jobs["Jobs\ncleanup\naudit\nrotinas"]
-    W_Consumers["Message Consumers\n(assíncrono)"]
+    W_Jobs["Jobs cleanup audit rotinas"]
+    W_Consumers["Message Consumers (assíncrono)"]
   end
 
   %% ==== Recursos Externos ====
-  DB[(SQL Server\nStored Procedures)]
-  Broker{{Message Broker\nRabbitMQ / Kafka}}
+  DB[(SQL Server Stored Procedures)]
+  Broker{{Message Broker RabbitMQ / Kafka}}
 
   %% ==== Fluxos ====
   Clients --> Presentation
