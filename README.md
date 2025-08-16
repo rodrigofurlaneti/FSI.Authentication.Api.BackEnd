@@ -1,8 +1,9 @@
-# FSI.Authentication — Application Layer
-
-## 1) Arquitetura (visão geral)
 ```mermaid
-%%{init: {"flowchart": {"htmlLabels": false}} }%%
+%% =====================================================================
+%% Arquitetura da Application Layer - FSI.Authentication
+%% =====================================================================
+
+%% VISÃO GERAL DA SOLUÇÃO (DDD/CQRS)
 flowchart TB
 
   subgraph Clients["Clients"]
@@ -48,7 +49,10 @@ flowchart TB
   Worker --> DB
   Worker --> Broker
 
-  %%{init: {"flowchart": {"htmlLabels": false}} }%%
+%% =====================================================================
+%% DETALHAMENTO DA APPLICATION LAYER (PASTAS E ARQUIVOS)
+%% =====================================================================
+
 flowchart TB
 
   A["/Application"] --> B["/Contracts"]
@@ -104,7 +108,10 @@ flowchart TB
   H --> H1["ApplicationException.cs"]
   H --> H2["ValidationException.cs"]
 
-%%{init: {"flowchart": {"htmlLabels": false}} }%%
+%% =====================================================================
+%% FUNÇÃO DE CADA PASTA
+%% =====================================================================
+
 flowchart LR
 
   subgraph Application["Application Layer (DDD/CQRS)"]
@@ -124,7 +131,4 @@ flowchart LR
   Common -->|Utilidades| DescCommon["Tipos utilitários: Result<T>, Errors,\nPagedResult, OperationStatus, helpers."]
   Behaviors -->|Pipeline| DescBehaviors["Cross-cutting (ex.: MediatR):\nLogging, Validation, Performance, Retry."]
   Exceptions -->|Erros| DescExceptions["Exceções da camada Application\npara falhas controladas/padronizadas."]
-
-
 ```
-
